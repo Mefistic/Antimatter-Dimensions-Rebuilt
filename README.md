@@ -17,6 +17,7 @@ Tickspeed Upgrades
 Planned Features:
 
 Make the game have 8 Dimensions!
+Dimension Boosts!
 Antimatter Galaxies!
 Prestige for IP! formula will be ([Antimatter]^0.00097657)-1
 IP Upgrades!

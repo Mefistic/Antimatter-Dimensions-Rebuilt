@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+    <script src="break_eternity.js"></script>
+    <script src="main.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Low Budget Dimensions</title>
+</head>
+<body>
+    <style>
+        body {
+        background-image: url("bg.png");
+        }
+
+        @font-face {
+            font-family: 'robotomono';
+            src: url('RobotoMono-Medium.ttf');
+        }
+        
+
+        h1 {
+            font: normal 30px robotomono;
+            color: white;
+            text-shadow: 0 0 5px #FF2020;
+            text-align: center;
+    }
+        button {
+            font: normal 15px robotomono;
+            background: #000;
+            color: white;
+            text-shadow: 0 0 5px #FF2020;
+            box-shadow: 0 0 5px #803030;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        div {
+            font: normal 15px robotomono;
+            color: white;
+            text-shadow: 0 0 5px #FF2020;
+            line-height: 50px;
+        }
+    </style>
+    <div id="antimatter"></div>
+    <p></p>
+    <div id="tickspeed"></div>
+    <button id="tickspeedBuy" onclick="buyTickspeed();"></button>
+    <p></p>
+    <div id="dim1"></div>
+    <button id="dim1Buy" onclick="buyDim1();"></button>
+    <p></p>
+    <div id="dim2"></div>
+    <button id="dim2Buy" onclick="buyDim2();"></button>
+    <p></p>
+    <div id="dim3"></div>
+    <button id="dim3Buy" onclick="buyDim3();"></button>
+    <p></p>
+    <div id="dim4"></div>
+    <button id="dim4Buy" onclick="buyDim4();"></button>
+</body>
+</html>

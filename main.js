@@ -1,4 +1,5 @@
 // this is my first time coding please dont cry
+
 let antimatter = new Decimal(1);
 //dim
 let dim1 = new Decimal(0);
@@ -46,27 +47,19 @@ let dimBoostMult = new Decimal(0);
 let galaxyMult = new Decimal(0);
 let developer = new Decimal(1);
 
-function format(bigboi) {
-    if (bigboi.layer == 2) {
-        if (bigboi.mag >= 1000) {
-        bigboi = "eee" + bigboi.log10().log10().log10().toFixed(2)
+function sci(num) {
+    if (num.layer == 0) {
+        if (num.mag >= 1000) {
+            num = num.m.toFixed(2) + "e" + num.e;
         }
         else {
-        bigboi = "ee" + bigboi.log10().log10().toFixed(2)
+            num = num.toFixed(2)
         }
     }
-    if (bigboi.layer == 1) {
-        bigboi = "e" + bigboi.log10().toFixed(2)
-    }
-    if (bigboi.layer == 0) {
-        if (bigboi.mag >= 1e3) {
-        bigboi = "e" + bigboi.log10().toFixed(2)
+    if (num.layer == 1) {
+        num = num.mantissaWithDecimalPlaces(2) + "e" + num.e;
         }
-        else {
-            bigboi = bigboi.toFixed(2)
-        }
-    }
-return bigboi;
+    return num.toString();
 }
 
 function buyTickspeed() {
@@ -219,6 +212,31 @@ addEventListener("keydown", function(e) {
     }
 })
 
+// save system
+
+if (!localStorage !== null || localStorage !== undefined) {
+    antimatter = new Decimal(localStorage.antimatter);
+    dim1 = new Decimal(localStorage.dim1);
+    dim2 = new Decimal(localStorage.dim2);
+    dim3 = new Decimal(localStorage.dim3);
+    dim4 = new Decimal(localStorage.dim4);
+    dim5 = new Decimal(localStorage.dim5);
+    dim6 = new Decimal(localStorage.dim6);
+    dim7 = new Decimal(localStorage.dim7);
+    dim8 = new Decimal(localStorage.dim8);
+    dim1Bought = new Decimal(localStorage.dim1Bought);
+    dim2Bought = new Decimal(localStorage.dim2Bought);
+    dim3Bought = new Decimal(localStorage.dim3Bought);
+    dim4Bought = new Decimal(localStorage.dim4Bought);
+    dim5Bought = new Decimal(localStorage.dim5Bought);
+    dim6Bought = new Decimal(localStorage.dim6Bought);
+    dim7Bought = new Decimal(localStorage.dim7Bought);
+    dim8Bought = new Decimal(localStorage.dim8Bought);
+    tsBought = new Decimal(localStorage.tsBought);
+    dimBoostBought = new Decimal(localStorage.dimBoostBought);
+    galaxyBought = new Decimal(localStorage.galaxyBought);
+}
+
 function gameTick() {
 
     // costs
@@ -368,79 +386,79 @@ function gameTick() {
 
     // visual
 
-    document.getElementById("antimatter").innerHTML = "<span class='antimatter-small'>You have <span class='antimatter'>" + format(antimatter) + "</span> Antimatter.</span>";
+    document.getElementById("antimatter").innerHTML = "<span class='antimatter-small'>You have <span class='antimatter'>" + sci(antimatter) + "</span> Antimatter.</span>";
     
-    document.getElementById("tickspeed").innerHTML = "You have " + format(tsBought) + " Tickspeed Upgrades. Tickspeed: " + format(tsMult.mul(100));
-    document.getElementById("tickspeedBuy").innerHTML = 'Increase Tickspeed. Cost: ' + format(tsCost);
+    document.getElementById("tickspeed").innerHTML = "You have " + sci(tsBought) + " Tickspeed Upgrades. Tickspeed: " + sci(tsMult.mul(100));
+    document.getElementById("tickspeedBuy").innerHTML = 'Increase Tickspeed. Cost: ' + sci(tsCost);
     document.getElementById("tickspeedBuy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(tsCost)) {
         document.getElementById("tickspeedBuy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim1").innerHTML = "You have " + format(dim1) + " First Dimensions. Multiplier: " + format(dim1Mult) + "x";
-    document.getElementById("dim1Buy").innerHTML = "Buy Dimension 1. Cost: " + format(dim1Cost);
+    document.getElementById("dim1").innerHTML = "You have " + sci(dim1) + " First Dimensions. Multiplier: " + sci(dim1Mult) + "x";
+    document.getElementById("dim1Buy").innerHTML = "Buy Dimension 1. Cost: " + sci(dim1Cost);
     document.getElementById("dim1Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim1Cost)) {
         document.getElementById("dim1Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
-    document.getElementById("dim2").innerHTML = "You have " + format(dim2) + " Second Dimensions. Multiplier: " + format(dim2Mult) + "x";
-    document.getElementById("dim2Buy").innerHTML = "Buy Dimension 2. Cost: " + format(dim2Cost);
+    document.getElementById("dim2").innerHTML = "You have " + sci(dim2) + " Second Dimensions. Multiplier: " + sci(dim2Mult) + "x";
+    document.getElementById("dim2Buy").innerHTML = "Buy Dimension 2. Cost: " + sci(dim2Cost);
     document.getElementById("dim2Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim2Cost)) {
         document.getElementById("dim2Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim3").innerHTML = "You have " + format(dim3) + " Third Dimensions. Multiplier: " + format(dim3Mult) + "x";
-    document.getElementById("dim3Buy").innerHTML = "Buy Dimension 3. Cost: " + format(dim3Cost);
+    document.getElementById("dim3").innerHTML = "You have " + sci(dim3) + " Third Dimensions. Multiplier: " + sci(dim3Mult) + "x";
+    document.getElementById("dim3Buy").innerHTML = "Buy Dimension 3. Cost: " + sci(dim3Cost);
     document.getElementById("dim3Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim3Cost)) {
         document.getElementById("dim3Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim4").innerHTML = "You have " + format(dim4) + " Fourth Dimensions. Multiplier: " + format(dim4Mult) + "x";
-    document.getElementById("dim4Buy").innerHTML = "Buy Dimension 4. Cost: " + format(dim4Cost);
+    document.getElementById("dim4").innerHTML = "You have " + sci(dim4) + " Fourth Dimensions. Multiplier: " + sci(dim4Mult) + "x";
+    document.getElementById("dim4Buy").innerHTML = "Buy Dimension 4. Cost: " + sci(dim4Cost);
     document.getElementById("dim4Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim4Cost)) {
         document.getElementById("dim4Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim5").innerHTML = "You have " + format(dim5) + " Fifth Dimensions. Multiplier: " + format(dim5Mult) + "x";
-    document.getElementById("dim5Buy").innerHTML = "Buy Dimension 5. Cost: " + format(dim5Cost);
+    document.getElementById("dim5").innerHTML = "You have " + sci(dim5) + " Fifth Dimensions. Multiplier: " + sci(dim5Mult) + "x";
+    document.getElementById("dim5Buy").innerHTML = "Buy Dimension 5. Cost: " + sci(dim5Cost);
     document.getElementById("dim5Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim5Cost)) {
         document.getElementById("dim5Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim6").innerHTML = "You have " + format(dim6) + " Sixth Dimensions. Multiplier: " + format(dim6Mult) + "x";
-    document.getElementById("dim6Buy").innerHTML = "Buy Dimension 6. Cost: " + format(dim6Cost);
+    document.getElementById("dim6").innerHTML = "You have " + sci(dim6) + " Sixth Dimensions. Multiplier: " + sci(dim6Mult) + "x";
+    document.getElementById("dim6Buy").innerHTML = "Buy Dimension 6. Cost: " + sci(dim6Cost);
     document.getElementById("dim6Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim6Cost)) {
         document.getElementById("dim6Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim7").innerHTML = "You have " + format(dim7) + " Seventh Dimensions. Multiplier: " + format(dim7Mult) + "x";
-    document.getElementById("dim7Buy").innerHTML = "Buy Dimension 7. Cost: " + format(dim7Cost);
+    document.getElementById("dim7").innerHTML = "You have " + sci(dim7) + " Seventh Dimensions. Multiplier: " + sci(dim7Mult) + "x";
+    document.getElementById("dim7Buy").innerHTML = "Buy Dimension 7. Cost: " + sci(dim7Cost);
     document.getElementById("dim7Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim7Cost)) {
         document.getElementById("dim7Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dim8").innerHTML = "You have " + format(dim8) + " Eighth Dimensions. Multiplier: " + format(dim8Mult) + "x";
-    document.getElementById("dim8Buy").innerHTML = "Buy Dimension 8. Cost: " + format(dim8Cost);
+    document.getElementById("dim8").innerHTML = "You have " + sci(dim8) + " Eighth Dimensions. Multiplier: " + sci(dim8Mult) + "x";
+    document.getElementById("dim8Buy").innerHTML = "Buy Dimension 8. Cost: " + sci(dim8Cost);
     document.getElementById("dim8Buy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dim8Cost)) {
         document.getElementById("dim8Buy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("dimBoost").innerHTML = "You have " + format(dimBoostBought) + " Dimension Boosts, Booting All Antimatter Dimensions by " + format(dimBoostMult) + "x";
-    document.getElementById("dimBoostBuy").innerHTML = "Boost Dimensions. Cost: " + format(dimBoostCost);
+    document.getElementById("dimBoost").innerHTML = "You have " + sci(dimBoostBought) + " Dimension Boosts, Booting All Antimatter Dimensions by " + sci(dimBoostMult) + "x";
+    document.getElementById("dimBoostBuy").innerHTML = "Boost Dimensions. Cost: " + sci(dimBoostCost);
     document.getElementById("dimBoostBuy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(dimBoostCost)) {
         document.getElementById("dimBoostBuy").style = "box-shadow: 0 0 5px #20FF20";
     }
 
-    document.getElementById("galaxy").innerHTML = "You have " + format(galaxyBought) + " Antimatter Galaxies, Boosting Each Tickspeed Upgrade Effect by " + format(galaxyMult) + "x";
-    document.getElementById("galaxyBuy").innerHTML = "Boost Tickspeed. Cost: " + format(galaxyCost);
+    document.getElementById("galaxy").innerHTML = "You have " + sci(galaxyBought) + " Antimatter Galaxies, Boosting Each Tickspeed Upgrade Effect by " + sci(galaxyMult) + "x";
+    document.getElementById("galaxyBuy").innerHTML = "Boost Tickspeed. Cost: " + sci(galaxyCost);
     document.getElementById("galaxyBuy").style = "box-shadow: 0 0 5px #FF2020";
     if(antimatter.greaterThanOrEqualTo(galaxyCost)) {
         document.getElementById("galaxyBuy").style = "box-shadow: 0 0 5px #20FF20";
@@ -448,5 +466,30 @@ function gameTick() {
 };
 
 setInterval(gameTick, 10);
+
+function save() {
+
+    localStorage.setItem('antimatter', antimatter);
+    localStorage.setItem('dim1', dim1);
+    localStorage.setItem('dim2', dim2);
+    localStorage.setItem('dim3', dim3);
+    localStorage.setItem('dim4', dim4);
+    localStorage.setItem('dim5', dim5);
+    localStorage.setItem('dim6', dim6);
+    localStorage.setItem('dim7', dim7);
+    localStorage.setItem('dim8', dim8);
+    localStorage.setItem('dim1Bought', dim1Bought);
+    localStorage.setItem('dim2Bought', dim2Bought);
+    localStorage.setItem('dim3Bought', dim3Bought);
+    localStorage.setItem('dim4Bought', dim4Bought);
+    localStorage.setItem('dim5Bought', dim5Bought);
+    localStorage.setItem('dim6Bought', dim6Bought);
+    localStorage.setItem('dim7Bought', dim7Bought);
+    localStorage.setItem('dim8Bought', dim8Bought);
+    localStorage.setItem('tsBought', tsBought);
+    localStorage.setItem('dimBoostBought', dimBoostBought);
+    localStorage.setItem('galaxyBought', galaxyBought);
+
+}
 
 //ip formula: antimatter.pow(0.00097656304).sub(1).floor()

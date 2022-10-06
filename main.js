@@ -492,4 +492,6 @@ function save() {
 
 }
 
+setInterval(save, 1000);
+
 //ip formula: antimatter.pow(0.00097656304).sub(1).floor()

@@ -214,7 +214,7 @@ addEventListener("keydown", function(e) {
 
 // save system
 
-if (!localStorage !== null || localStorage !== undefined) {
+if (localStorage.length !== 0) {
     antimatter = new Decimal(localStorage.antimatter);
     dim1 = new Decimal(localStorage.dim1);
     dim2 = new Decimal(localStorage.dim2);

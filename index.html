@@ -1,66 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
     <script src="break_eternity.js"></script>
     <script src="main.js"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Low Budget Dimensions</title>
+    <title>AD Rebuilt</title>
 </head>
+
 <body>
     <style>
         body {
-        background-image: url("bg.png");
+
+            background-image: url("bg.png");
+
         }
 
         @font-face {
-            font-family: 'robotomono';
-            src: url('RobotoMono-Medium.ttf');
-        }
-        
 
-        h1 {
-            font: normal 30px robotomono;
+            font-family: 'Typewriter';
+            src: url('MonospaceTypewriter.ttf');
+
+        }
+
+        .antimatter-small {
+
+            font: normal 15px Typewriter;
             color: white;
-            text-shadow: 0 0 5px #FF2020;
             text-align: center;
-    }
+            user-select: none;
+
+        }
+
+        .antimatter {
+
+            font: normal 30px Typewriter;
+            color: white;
+            text-align: center;
+            user-select: none;
+            text-shadow: 0 0 5px #FF0000, 0 0 3px #FF8080;
+            font: normal 30px Typewriter
+        }
+
+        span {
+
+            font: normal 15px Typewriter;
+            color: white;
+            line-height: 50px;
+            text-align: left;
+            user-select: none;
+
+        }
+
         button {
-            font: normal 15px robotomono;
+
+            font: normal 15px Typewriter;
+            float: right;
             background: #000;
             color: white;
-            text-shadow: 0 0 5px #FF2020;
-            box-shadow: 0 0 5px #803030;
-            border-radius: 3px;
-            text-align: center;
-        }
+            text-align: right;
+            border-radius: 10px;
+            user-select: none;
 
-        div {
-            font: normal 15px robotomono;
-            color: white;
-            text-shadow: 0 0 5px #FF2020;
-            line-height: 50px;
         }
     </style>
-    <div id="antimatter"></div>
+    <div style="text-align: center;">
+        <span id="antimatter"></span>
+    </div>
     <p></p>
-    <div id="tickspeed"></div>
-    <button id="tickspeedBuy" onclick="buyTickspeed();"></button>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="tickspeed"></span><button id="tickspeedBuy" onclick="buyTickspeed();"></button>
+    </div>
     <p></p>
-    <div id="dim1"></div>
-    <button id="dim1Buy" onclick="buyDim1();"></button>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim1"></span><button id="dim1Buy" onclick="buyDim1();"></button>
+    </div>
     <p></p>
-    <div id="dim2"></div>
-    <button id="dim2Buy" onclick="buyDim2();"></button>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim2"></span><button id="dim2Buy" onclick="buyDim2();"></button>
+    </div>
     <p></p>
-    <div id="dim3"></div>
-    <button id="dim3Buy" onclick="buyDim3();"></button>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim3"></span><button id="dim3Buy" onclick="buyDim3();"></button>
+    </div>
     <p></p>
-    <div id="dim4"></div>
-    <button id="dim4Buy" onclick="buyDim4();"></button>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim4"></span><button id="dim4Buy" onclick="buyDim4();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim5"></span><button id="dim5Buy" onclick="buyDim5();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim6"></span><button id="dim6Buy" onclick="buyDim6();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim7"></span><button id="dim7Buy" onclick="buyDim7();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dim8"></span><button id="dim8Buy" onclick="buyDim8();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="dimBoost"></span><button id="dimBoostBuy" onclick="buyDimboost();"></button>
+    </div>
+    <p></p>
+    <div style="display:flex; align-items:center; justify-content: space-between;">
+        <span id="galaxy"></span><button id="galaxyBuy" onclick="buyGalaxy();"></button>
+    </div>
+    <a class="antimatter" href="https://discord.gg/yDSXx6q2j6" target="_blank" style="position: fixed; font: normal 20px Typewriter; text-decoration: none; top: 950px;">Discord</a>
 </body>
 </html>

@@ -1035,7 +1035,7 @@
       key: "toFixed",
       value: function toFixed(places) {
         if (this.layer === 0) {
-          return (this.sign * this.mag).toFixed(places);
+          return (this.mag).toFixed(places);
         }
 
         return this.toStringWithDecimalPlaces(places);

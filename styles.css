@@ -1,0 +1,180 @@
+@font-face {
+    font-family: 'default';
+    src: url('font.ttf');
+}
+
+body {
+    background-color: rgb(15, 15, 16);
+    font-family: 'default';
+}
+
+p {
+    font-size: 7.5px;
+}
+
+#antimatter {
+    text-align: center;
+}
+
+.antimattercount {
+    font-size: 25px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 3px #8040FF, 0 0 10px #8040FF;
+    text-align: center;
+}
+
+.antimattercountsmall {
+    font-size: 15px;
+    color: white;
+    text-align: center;
+}
+
+#antimattersec {
+    text-align: center;
+}
+
+.antimattersec {
+    font-size: 10px;
+    color: lightgray;
+    text-align: center;
+    position: relative;
+    top: -5px;
+}
+
+.tickspeedtext {
+    font-size: 10px;
+    color: lightgray;
+    text-align: center;
+    position: relative;
+    top: -10px;
+}
+
+.tstextbottom {
+    font-size: 10px;
+    color: lightgray;
+    text-align: center;
+    position: relative;
+    top: -20px;
+}
+
+.tickspeedbuybutton {
+    all: unset;
+    font-size: 11px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 1px;
+    border-color: rgb(32, 128, 32);
+    width: 200px;
+    height: 19px;
+    position: relative;
+    top: -27px;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+.tickspeedbuybutton:hover {
+    background-color: rgb(128, 255, 128);
+    color: black;
+    cursor: pointer;
+}
+
+.tickspeedbuybuttondisabled {
+    all: unset;
+    font-size: 11px;
+    color: lightgray;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 1px;
+    border-color: rgb(128, 64, 64);
+    width: 200px;
+    height: 19px;
+    position: relative;
+    top: -27px;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+#container {
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.25);
+    padding: 15px;
+}
+
+#dimensionamount {
+    padding-left: 100px;
+}
+
+#dimensionbought {
+    padding-left: 100px;
+}
+
+#dimensionmult {
+    padding-left: 100px;
+}
+
+#dimensionbuy {
+    padding-left: 500px;
+}
+
+.dim {
+    font-size: 15px;
+    color:lightgray;
+    display: inline-block;
+}
+
+.dimbuybutton {
+    all: unset;
+    font-size: 11px;
+    color: white;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 1px;
+    border-color: rgb(32, 128, 32);
+    width: 300px;
+    height: 19px;
+    display: inline;
+    position: relative;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+.dimbuybutton:hover {
+    background-color: rgb(128, 255, 128);
+    color: black;
+    cursor: pointer;
+}
+
+.dimbuybuttondisabled {
+    all: unset;
+    font-size: 11px;
+    color: lightgray;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 1px;
+    border-color: rgb(128, 64, 64);
+    width: 300px;
+    height: 19px;
+    display: inline;
+    position: relative;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+#buydimcontainer {
+    position: absolute;
+    top: 211px;
+    left: 1290px;
+    line-height: 0px;
+}

@@ -1,7 +1,6 @@
 function save() {
     localStorage.setItem('antimatter', game.antimatter);
     localStorage.setItem('tickspeedamount', game.tickspeed.amount);
-    localStorage.setItem('tickspeedbought', game.tickspeed.bought);
     localStorage.setItem('dim1amount', game.dim1.amount);
     localStorage.setItem('dim1bought', game.dim1.bought);
     localStorage.setItem('dim2amount', game.dim2.amount);
@@ -18,12 +17,12 @@ function save() {
     localStorage.setItem('dim7bought', game.dim7.bought);
     localStorage.setItem('dim8amount', game.dim8.amount);
     localStorage.setItem('dim8bought', game.dim8.bought);
+    localStorage.setItem('dimboostamount', game.dimboost.amount)
 }
 
 if (localStorage.length !== 0) {
     game.antimatter = new Decimal(localStorage.antimatter);
     game.tickspeed.amount = new Decimal(localStorage.tickspeedamount);
-    game.tickspeed.bought = new Decimal(localStorage.tickspeedbought);
     game.dim1.amount = new Decimal(localStorage.dim1amount);
     game.dim1.bought = new Decimal(localStorage.dim1bought);
     game.dim2.amount = new Decimal(localStorage.dim2amount);
@@ -40,6 +39,7 @@ if (localStorage.length !== 0) {
     game.dim7.bought = new Decimal(localStorage.dim7bought);
     game.dim8.amount = new Decimal(localStorage.dim8amount);
     game.dim8.bought = new Decimal(localStorage.dim8bought);
+    game.dimboost.amount = new Decimal(localStorage.dimboostamount);
 }
 
 setInterval(save, 1000)

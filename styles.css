@@ -16,6 +16,14 @@ p {
     text-align: center;
 }
 
+#discord {
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    text-shadow: 0 0 3px #8040FF, 0 0 10px #8040FF;
+    padding: 10px;
+    text-decoration: none;
+}
+
 .antimattercount {
     font-size: 25px;
     color: rgb(255, 255, 255);
@@ -99,7 +107,7 @@ p {
     transition-duration: 0.333s;
 }
 
-#container {
+.container {
     border-style: solid;
     border-width: 2px;
     border-radius: 10px;
@@ -174,7 +182,11 @@ p {
 
 #buydimcontainer {
     position: absolute;
-    top: 211px;
-    left: 1290px;
+    top: 237px;
+    left: 1280px;
     line-height: 0px;
+}
+
+#dimboostbuy {
+    float: right;
 }

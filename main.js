@@ -64,13 +64,11 @@ let game = {
     },
     dimboost: {
         amount: new Decimal("0"),
-        bought: new Decimal("0"),
         cost: new Decimal("0"),
         effect: new Decimal("0")
     },
     galaxy: {
         amount: new Decimal("0"),
-        bought: new Decimal("0"),
         cost: new Decimal("0"),
         effect: new Decimal("0")
     }
@@ -115,42 +113,42 @@ function generate(thing) {
 function dimmult(thing) {
 
 if (thing == "dim1") {
-    thing = new Decimal("2").pow(game.dim1.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim1.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim2") {
-    thing = new Decimal("2").pow(game.dim2.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim2.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim3") {
-    thing = new Decimal("2").pow(game.dim3.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim3.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim4") {
-    thing = new Decimal("2").pow(game.dim4.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim4.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim5") {
-    thing = new Decimal("2").pow(game.dim5.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim5.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim6") {
-    thing = new Decimal("2").pow(game.dim6.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim6.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim7") {
-    thing = new Decimal("2").pow(game.dim7.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim7.bought.div(10).floor());
     return thing;
 }
 
 if (thing == "dim8") {
-    thing = new Decimal("2").pow(game.dim8.bought.div(10).floor());
+    thing = (new Decimal("2").add(game.dimboost.effect)).pow(game.dim8.bought.div(10).floor());
     return thing;
 }
 }
@@ -290,6 +288,21 @@ function buy(thing) {
             game.tickspeed.amount = game.tickspeed.amount.add("1");
         }
     }
+    if (thing == "dimboost") {
+        if (game.dim1.bought.greaterThanOrEqualTo(game.dimboost.cost)) {
+            game.dim1.amount = game.dim1.bought = new Decimal("0");
+            game.dim2.amount = game.dim2.bought = new Decimal("0");
+            game.dim3.amount = game.dim3.bought = new Decimal("0");
+            game.dim4.amount = game.dim4.bought = new Decimal("0");
+            game.dim5.amount = game.dim5.bought = new Decimal("0");
+            game.dim6.amount = game.dim6.bought = new Decimal("0");
+            game.dim7.amount = game.dim7.bought = new Decimal("0");
+            game.dim8.amount = game.dim8.bought = new Decimal("0");
+            game.tickspeed.amount = new Decimal("0");
+            game.antimatter = new Decimal("10");
+            game.dimboost.amount = game.dimboost.amount.add("1");
+        }
+    }
     if (thing == "max") {
         buy("10dim8");
         buy("10dim1");
@@ -319,44 +332,55 @@ function tick() {
     game.dim6.mult = dimmult("dim6");
     game.dim7.mult = dimmult("dim7");
     game.dim8.mult = dimmult("dim8");
-    game.tickspeed.effect = new Decimal(1.2).pow(game.tickspeed.amount);
+    game.tickspeed.effect = new Decimal(1.1).pow(game.tickspeed.amount);
+    game.dimboost.effect = new Decimal(game.dimboost.amount.div(4));
 
-    game.tickspeed.cost = new Decimal("10").pow(game.tickspeed.amount.add("3"));
-    game.dim1.cost1 = new Decimal("1e3").pow(game.dim1.bought.div(10).floor().add("1")).div(100);
-    game.dim2.cost1 = new Decimal("1e4").pow(game.dim2.bought.div(10).floor().add("1")).div(100);
-    game.dim3.cost1 = new Decimal("1e6").pow(game.dim3.bought.div(10).floor().add("1")).div(100);
-    game.dim4.cost1 = new Decimal("1e9").pow(game.dim4.bought.div(10).floor().add("1")).div(10);
-    game.dim5.cost1 = new Decimal("1e13").pow(game.dim5.bought.div(10).floor().add("1")).div(1);
-    game.dim6.cost1 = new Decimal("1e18").pow(game.dim6.bought.div(10).floor().add("1")).div(0.01);
-    game.dim7.cost1 = new Decimal("1e24").pow(game.dim7.bought.div(10).floor().add("1")).div(0.0001);
-    game.dim8.cost1 = new Decimal("1e30").pow(game.dim8.bought.div(10).floor().add("1")).div(0.00000001);
-/*
-    if (game.dim1.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim1.cost1 = new Decimal(10).pow(((game.dim1.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    game.tickspeed.cost = new Decimal("10").pow(game.tickspeed.amount).mul(1000);
+    game.dim1.cost1 = new Decimal("1e3").pow(game.dim1.bought.div(10).floor().add("1")).mul(0.01);
+    game.dim2.cost1 = new Decimal("1e4").pow(game.dim2.bought.div(10).floor().add("1")).mul(0.01);
+    game.dim3.cost1 = new Decimal("1e5").pow(game.dim3.bought.div(10).floor().add("1")).mul(0.1);
+    game.dim4.cost1 = new Decimal("1e6").pow(game.dim4.bought.div(10).floor().add("1")).mul(10);
+    game.dim5.cost1 = new Decimal("1e7").pow(game.dim5.bought.div(10).floor().add("1")).mul(1e5);
+    game.dim6.cost1 = new Decimal("1e8").pow(game.dim6.bought.div(10).floor().add("1")).mul(1e10);
+    game.dim7.cost1 = new Decimal("1e9").pow(game.dim7.bought.div(10).floor().add("1")).mul(1e20);
+    game.dim8.cost1 = new Decimal("1e10").pow(game.dim8.bought.div(10).floor().add("1")).mul(1e40);
+    game.dimboost.cost = new Decimal(20).add(game.dimboost.amount.mul(10)).mul(new Decimal(1).add(game.dimboost.amount.div(10))).div(10).floor().mul(10);
+
+    if (game.dim1.bought.greaterThanOrEqualTo("90")) {
+        game.dim1.cost1 = game.dim1.cost1.pow(1.5);
+        game.dim1.cost1 = new Decimal(10).pow(game.dim1.cost1.e);
     }
-    if (game.dim2.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim2.cost1 = new Decimal(10).pow(((game.dim2.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim2.bought.greaterThanOrEqualTo("80")) {
+        game.dim2.cost1 = game.dim2.cost1.pow(1.5);
+        game.dim2.cost1 = new Decimal(10).pow(game.dim2.cost1.e);
     }
-    if (game.dim3.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim3.cost1 = new Decimal(10).pow(((game.dim3.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim3.bought.greaterThanOrEqualTo("70")) {
+        game.dim3.cost1 = game.dim3.cost1.pow(1.5);
+        game.dim3.cost1 = new Decimal(10).pow(game.dim3.cost1.e);
     }
-    if (game.dim4.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim4.cost1 = new Decimal(10).pow(((game.dim4.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim4.bought.greaterThanOrEqualTo("60")) {
+        game.dim4.cost1 = game.dim4.cost1.pow(1.5);
+        game.dim4.cost1 = new Decimal(10).pow(game.dim4.cost1.e);
     }
-    if (game.dim5.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim5.cost1 = new Decimal(10).pow(((game.dim5.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim5.bought.greaterThanOrEqualTo("50")) {
+        game.dim5.cost1 = game.dim5.cost1.pow(1.5);
+        game.dim5.cost1 = new Decimal(10).pow(game.dim5.cost1.e);
     }
-    if (game.dim6.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim6.cost1 = new Decimal(10).pow(((game.dim6.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim6.bought.greaterThanOrEqualTo("40")) {
+        game.dim6.cost1 = game.dim6.cost1.pow(1.5);
+        game.dim6.cost1 = new Decimal(10).pow(game.dim6.cost1.e);
     }
-    if (game.dim7.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim7.cost1 = new Decimal(10).pow(((game.dim7.cost1.div("4.6e16")).pow(1.5)).log10().floor())
+    if (game.dim7.bought.greaterThanOrEqualTo("30")) {
+        game.dim7.cost1 = game.dim7.cost1.pow(1.5);
+        game.dim7.cost1 = new Decimal(10).pow(game.dim7.cost1.e);
     }
-    if (game.dim8.cost1.greaterThanOrEqualTo("1e50")) {
-        game.dim8.cost1 = new Decimal(10).pow(((game.dim8.cost1.div("4.6e16")).pow(1.5)).log10().floor())
-    }*/
-    if (game.tickspeed.cost.greaterThanOrEqualTo("1e50")) {
-        game.tickspeed.cost = new Decimal(10).pow(((game.tickspeed.cost.div("1e25")).pow(2)).log10().floor())
+    if (game.dim8.bought.greaterThanOrEqualTo("20")) {
+        game.dim8.cost1 = game.dim8.cost1.pow(1.5);
+        game.dim8.cost1 = new Decimal(10).pow(game.dim8.cost1.e);
+    }
+    if (game.tickspeed.amount.greaterThanOrEqualTo("97")) {
+        game.tickspeed.cost = tickspeed.cost.pow(2);
+        game.tickspeed.cost = new Decimal(10).pow(game.tickspeed.cost.e);
     }
 
     game.dim1.cost10 = game.dim1.cost1.mul(new Decimal(10).sub(game.dim1.bought.div(10).floor().mul(10).sub(game.dim1.bought).abs()));
@@ -413,8 +437,11 @@ function tick() {
     document.getElementById("dim8buy10").innerHTML = 'Buy Until 10. Cost: ' + short(game.dim8.cost10);
 
     document.getElementById("tickspeed").innerHTML = 'Tickspeed: ' + short(game.tickspeed.effect);
-    document.getElementById("tickspeedeffect").innerHTML = 'Multiply the tickspeed by ' + short(new Decimal("1.2")) + 'x';
+    document.getElementById("tickspeedeffect").innerHTML = 'Multiply the tickspeed by ' + short(new Decimal("1.1")) + 'x';
     document.getElementById("tickspeedbuy").innerHTML = 'Cost: ' + short(game.tickspeed.cost);
+
+    document.getElementById("dimboost").innerHTML = 'You have ' + short(game.dimboost.amount) + ' dimension boosts, giving +' + short(game.dimboost.effect) + ' to the buy 10 multiplier.';
+    document.getElementById("dimboostbuy").innerHTML = 'Cost: ' + short(game.dimboost.cost) + ' First Dimensions Bought';
 
     if (game.antimatter.greaterThanOrEqualTo(game.tickspeed.cost)) {
         document.getElementById("tickspeedbuy").className = "tickspeedbuybutton";
@@ -517,6 +544,12 @@ function tick() {
     }
     else {
         document.getElementById("dim8buy10").className = "dimbuybuttondisabled";
+    }
+    if (game.dim1.bought.greaterThanOrEqualTo(game.dimboost.cost)) {
+        document.getElementById("dimboostbuy").className = "dimbuybutton";
+    }
+    else {
+        document.getElementById("dimboostbuy").className = "dimbuybuttondisabled";
     }
 }
 

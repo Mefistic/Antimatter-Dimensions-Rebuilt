@@ -1,3 +1,4 @@
+
 let game = {
     tab: "antimatter",
     anti: new Decimal("10"),
@@ -47,22 +48,17 @@ function updatecosts() {
     for (let i of dims) {
             game.d[i].cost1 = (new Decimal(dimbasecosts[j]).mul(new Decimal(game.d[i].costscale).pow(new Decimal(game.d[i].bought).div(10).floor())))
             if (new Decimal(game.d[i].bought).greaterThanOrEqualTo(100)) {
-                game.d[i].cost1 = new Decimal(game.d[i].cost1).pow(1.33)
+                game.d[i].cost1 = new Decimal(game.d[i].cost1).mul(new Decimal(10).pow((game.d[i].bought.sub(100))))
             }
-            if (new Decimal(game.d[i].bought).greaterThanOrEqualTo(400)) {
-                game.d[i].cost1 = new Decimal(game.d[i].cost1).pow(1.33)
-            }
-            if (new Decimal(game.d[i].cost1).greaterThanOrEqualTo(1.797e308)) {
-                game.d[i].cost1 = new Decimal(game.d[i].cost1).pow(1.25)
-            }
-            game.d[i].cost1 = new Decimal(10).pow(game.d[i].cost1.e)
             game.d[i].cost10 = (new Decimal(game.d[i].cost1).mul(new Decimal(10).sub(new Decimal(game.d[i].bought).div(10).floor().mul(10).sub(new Decimal(game.d[i].bought)).abs())))
             j++
     }
     game.tickspeed.cost = (new Decimal(10).pow((new Decimal(game.tickspeed.amount)).add(3)))
-    game.tickspeed.cost = new Decimal(10).pow(game.tickspeed.cost.e)
-    game.dimboost.cost = (new Decimal(20).add(new Decimal(10).mul(new Decimal(game.dimboost.amount)))).mul((new Decimal(1).add((new Decimal(game.dimboost.amount)).div(10)))).div(10).floor().mul(10)
-    game.galaxy.cost = (new Decimal(40).add(new Decimal(20).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(20)))).div(10).floor().mul(10)
+    if (new Decimal(game.tickspeed.amount).greaterThanOrEqualTo(50)) {
+        game.tickspeed.cost = new Decimal(game.tickspeed.cost).mul(new Decimal(10).pow((game.tickspeed.amount.sub(50))))
+    }
+    game.dimboost.cost = (new Decimal(20).add(new Decimal(20).mul(new Decimal(game.dimboost.amount)))).mul((new Decimal(1).add((new Decimal(game.dimboost.amount)).div(40)))).div(10).floor().mul(10)
+    game.galaxy.cost = (new Decimal(40).add(new Decimal(40).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(5)))).div(10).floor().mul(10)
 }
 
 function updatemult() {
@@ -70,15 +66,15 @@ function updatemult() {
     for (let i of dims) {
         game.d[i].mult = (new Decimal(2).add(new Decimal(game.dimboost.effect))).pow(new Decimal(game.d[i].bought).div(10).floor())
     }
-    game.galaxy.effect = new Decimal(game.galaxy.amount).div(10)
+    game.galaxy.effect = (new Decimal(game.galaxy.amount)).div(20)
     game.tickspeed.effect = (new Decimal(1.1).add(new Decimal(game.galaxy.effect))).pow(new Decimal(game.tickspeed.amount))
 }
 
 function generate() {
     for (let i = 1; i < 8; i++) {
-        game.d[i].amount = new Decimal(game.d[i].amount).add((new Decimal(game.d[i + 1].amount)).mul(new Decimal(game.d[i+1].mult)).div(60))
+        game.d[i].amount = new Decimal(game.d[i].amount).add((new Decimal(game.d[i + 1].amount)).mul(new Decimal(game.d[i+1].mult)).mul(game.tickspeed.effect).div(60))
     }
-    game.anti = new Decimal(game.anti).add((new Decimal(game.d[1].amount)).mul(new Decimal(game.d[1].mult)).div(60))
+    game.anti = new Decimal(game.anti).add((new Decimal(game.d[1].amount)).mul(new Decimal(game.d[1].mult)).mul(game.tickspeed.effect).div(60))
 }
 
 function buy(amount, dim) {
@@ -104,7 +100,7 @@ function dimboost() {
             game.d[i].amount = new Decimal(0)
             game.d[i].bought = new Decimal(0)
             game.tickspeed.amount = new Decimal(0)
-            game.anti = new Decimal(10)
+            game.anti = new Decimal(100)
         }
         game.dimboost.amount = new Decimal(game.dimboost.amount).add(1)
     }
@@ -117,7 +113,7 @@ function buygalaxy() {
             game.d[i].bought = new Decimal(0)
         }
         game.tickspeed.amount = new Decimal(0)
-        game.anti = new Decimal(10)
+        game.anti = new Decimal(1e5)
         game.dimboost.amount = new Decimal(game.dimboost.amount).sub(4).max(0)
         game.galaxy.amount = new Decimal(game.galaxy.amount).add(1)
     }

@@ -4,52 +4,108 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antimatter Dimensions Rebuilt</title>
+    <title>Anti Dims Rebuilt</title>
     <script src="break_eternity.min.js"></script>
+    <script src="ui.js"></script>
     <script src="main.js"></script>
-    <script src="save.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <a id="discord" href="https://www.discord.gg/yDSXx6q2j6" target="_blank">Discord</a>
-    <div id="antimatter">
-        <span id="antimatter"></span>
+<br>
+<div class="center">
+    <div id="topcontainer">
+        <span id="antimatter" class="antimattertext"></span><br>
+        <span id="antimatterpersec" class="antimatterpersectext"></span><br><p>.</p>
+        <span id="tickspeed" class="tickspeed"></span><br>
+        <span id="tickspeedeffect" class="tickspeedeffect"></span><br>
+        <p>.</p>
+        <button id="tickspeedbuy" class="buybuttondisabled" onclick="buytickspeed()"></button>
     </div>
-    <div id="antimattersec">
-        <span id="antimattersec"></span>
+</div>
+<br>
+<br>
+<br>
+<br>
+<div id="dimensioncontainer">
+    <div class="stupid">
+    <br><br>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 1)" id="1d1"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 1)" id="10d1"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 2)" id="1d2"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 2)" id="10d2"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 3)" id="1d3"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 3)" id="10d3"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 4)" id="1d4"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 4)" id="10d4"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 5)" id="1d5"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 5)" id="10d5"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 6)" id="1d6"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 6)" id="10d6"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 7)" id="1d7"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 7)" id="10d7"></button><br><p>.</p>
+    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 8)" id="1d8"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 8)" id="10d8"></button>
     </div>
-    <div style="text-align: center;">
-    <p id="tickspeed" class="tickspeedtext"></p>
-    <p id="tickspeedeffect" class="tstextbottom"></p>
-    <button id="tickspeedbuy" class="tickspeedbuybutton" onclick="buy('tickspeed')"></button>
+<div style="line-height: 2.2em; max-height: 1em;">
+    <div id="dimorder" class="dimensioninfo">
+        <ul style="list-style-type:none;">
+            <li>Dimension</li>
+            <p></p>
+            <li>1st<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>2nd<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>3rd<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>4th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>5th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>6th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>7th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+            <li>8th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
+        </ul>
     </div>
-    <br>
-    <div class="container">
-        <span id="dimensionordinal" class="dim"></span>
-        <span id="dimensionamount" class="dim"></span>
-        <span id="dimensionbought" class="dim"></span>
-        <span id="dimensionmult" class="dim"></span>
-        <div id="buydimcontainer">
-            <button id="dim1buy1" class="dimbuybutton" onclick="buy('1dim1')"></button> <button id="dim1buy10" class="dimbuybutton" onclick="buy('10dim1')"></button>
-            <p></p>
-            <button id="dim2buy1" class="dimbuybutton" onclick="buy('1dim2')"></button> <button id="dim2buy10" class="dimbuybutton" onclick="buy('10dim2')"></button>
-            <p></p>
-            <button id="dim3buy1" class="dimbuybutton" onclick="buy('1dim3')"></button> <button id="dim3buy10" class="dimbuybutton" onclick="buy('10dim3')"></button>
-            <p></p>
-            <button id="dim4buy1" class="dimbuybutton" onclick="buy('1dim4')"></button> <button id="dim4buy10" class="dimbuybutton" onclick="buy('10dim4')"></button>
-            <p></p>
-            <button id="dim5buy1" class="dimbuybutton" onclick="buy('1dim5')"></button> <button id="dim5buy10" class="dimbuybutton" onclick="buy('10dim5')"></button>
-            <p></p>
-            <button id="dim6buy1" class="dimbuybutton" onclick="buy('1dim6')"></button> <button id="dim6buy10" class="dimbuybutton" onclick="buy('10dim6')"></button>
-            <p></p>
-            <button id="dim7buy1" class="dimbuybutton" onclick="buy('1dim7')"></button> <button id="dim7buy10" class="dimbuybutton" onclick="buy('10dim7')"></button>
-            <p></p>
-            <button id="dim8buy1" class="dimbuybutton" onclick="buy('1dim8')"></button> <button id="dim8buy10" class="dimbuybutton" onclick="buy('10dim8')"></button>
-        </div>
+    <div id="dimamount" class="dimensioninfo">
+        <ul style="list-style-type:none;">
+        <li><span>Amount</span></li>
+        <p></p>
+        <li><span id="amountd1"></span></li>
+        <li><span id="amountd2"></span></li>
+        <li><span id="amountd3"></span></li>
+        <li><span id="amountd4"></span></li>
+        <li><span id="amountd5"></span></li>
+        <li><span id="amountd6"></span></li>
+        <li><span id="amountd7"></span></li>
+        <li><span id="amountd8"></span></li>
+        </ul>
     </div>
-    <br>
-    <div class="container" id="dimboostcontainer">
-        <span id="dimboost" class="dim"></span> <button id="dimboostbuy" class="dimbuybutton" onclick="buy('dimboost')"></button>
+    <div id="dimbought" class="dimensioninfo">
+        <ul style="list-style-type:none;">
+        <li><span>Bought</span></li>
+        <p></p>
+        <li><span id="boughtd1"></span></li>
+        <li><span id="boughtd2"></span></li>
+        <li><span id="boughtd3"></span></li>
+        <li><span id="boughtd4"></span></li>
+        <li><span id="boughtd5"></span></li>
+        <li><span id="boughtd6"></span></li>
+        <li><span id="boughtd7"></span></li>
+        <li><span id="boughtd8"></span></li>
+        </ul>
     </div>
+    <div id="dimmult" class="dimensioninfo">
+        <ul style="list-style-type:none;">
+        <li><span>Multiplier</span></li>
+        <p></p>
+        <li><span id="multd1"></span></li>
+        <li><span id="multd2"></span></li>
+        <li><span id="multd3"></span></li>
+        <li><span id="multd4"></span></li>
+        <li><span id="multd5"></span></li>
+        <li><span id="multd6"></span></li>
+        <li><span id="multd7"></span></li>
+        <li><span id="multd8"></span></li>
+        </ul>
+    </div>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><p>.</p><p>.</p>
+<div id="prestigecontainer">
+    <div class="stupid">
+        <button id="dimboost" class="buybuttondisabled" onclick="dimboost()"></button>
+    </div>
+    <span id="dimboostinfo" class="dimensioninfo"></span><br><br>
+    <div class="stupid">
+        <button id="galaxy" class="buybuttondisabled" onclick="buygalaxy()"></button>
+    </div>
+    <span id="galaxyinfo" class="dimensioninfo"></span>
+</div>
 </body>
 </html>

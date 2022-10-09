@@ -4,189 +4,167 @@
 }
 
 body {
-    background-color: rgb(15, 15, 16);
+    all: unset;
+    background-color: rgb(15, 14, 16);
     font-family: 'default';
+    user-select: none;
+    line-height: 150%;
+}
+
+.antimattertext {
+    all: unset;
+    text-align: center;
+    font-size: 1em;
+    color: white;
+}
+
+.antimattertextglow {
+    all: unset;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 0.1em rgb(204, 156, 255), 0 0 0.5em rgb(180, 110, 255);
+}
+
+.antimatterpersectext {
+    font-size: 0.75em;
+    color: lightgray;
+}
+
+#topcontainer {
+    max-width: 100em;
+    height: 5em;
+    text-align: center;
+    left: 50%;
+}
+
+.tickspeed {
+    font-size: 0.75em;
+    color: lightgray;
+}
+
+.tickspeedeffect {
+    font-size: 0.75em;
+    color: lightgray;
+}
+
+.buybuttondisabled {
+    all: unset;
+    font-size: 0.75em;
+    color: lightgray;
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 0.1em;
+    border-color: rgb(128, 64, 64);
+    width: 25em;
+    height: auto;
+    min-height: 1.5em;
+    display: inline;
+    position: relative;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+.buybuttonenabled {
+    all: unset;
+    font-size: 0.75em;
+    color: white;
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 0.1em;
+    border-color: rgb(64, 128, 64);
+    width: 25em;
+    height: auto;
+    min-height: 1.5em;
+    display: inline;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+}
+
+.buybuttonenabled:hover {
+    background-color: rgb(128, 255, 128);
+    color: black;
 }
 
 p {
-    font-size: 7.5px;
+    font-size: 0.25em;
+    line-height: 0em;
+    color: rgba(0, 0, 0, 0.0);
 }
 
-#antimatter {
-    text-align: center;
-}
-
-#discord {
-    font-size: 20px;
-    color: rgb(255, 255, 255);
-    text-shadow: 0 0 3px #8040FF, 0 0 10px #8040FF;
-    padding: 10px;
-    text-decoration: none;
-}
-
-.antimattercount {
-    font-size: 25px;
-    color: rgb(255, 255, 255);
-    text-shadow: 0 0 3px #8040FF, 0 0 10px #8040FF;
-    text-align: center;
-}
-
-.antimattercountsmall {
-    font-size: 15px;
-    color: white;
-    text-align: center;
-}
-
-#antimattersec {
-    text-align: center;
-}
-
-.antimattersec {
-    font-size: 10px;
-    color: lightgray;
-    text-align: center;
-    position: relative;
-    top: -5px;
-}
-
-.tickspeedtext {
-    font-size: 10px;
-    color: lightgray;
-    text-align: center;
-    position: relative;
-    top: -10px;
-}
-
-.tstextbottom {
-    font-size: 10px;
-    color: lightgray;
-    text-align: center;
-    position: relative;
-    top: -20px;
-}
-
-.tickspeedbuybutton {
-    all: unset;
-    font-size: 11px;
-    color: white;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
+#dimensioncontainer {
+    background-color: rgba(0, 0, 0, 0.25);
     border: solid;
-    text-align: center;
-    border-width: 1px;
-    border-color: rgb(32, 128, 32);
-    width: 200px;
-    height: 19px;
-    position: relative;
-    top: -27px;
-    flex-wrap: nowrap;
-    transition-duration: 0.333s;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 0.5em;
+    width: auto;
+    height: 20em;
 }
 
-.tickspeedbuybutton:hover {
-    background-color: rgb(128, 255, 128);
-    color: black;
-    cursor: pointer;
-}
-
-.tickspeedbuybuttondisabled {
-    all: unset;
-    font-size: 11px;
+.dimensioninfo {
     color: lightgray;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: solid;
-    text-align: center;
-    border-width: 1px;
-    border-color: rgb(128, 64, 64);
-    width: 200px;
-    height: 19px;
+    font-size: 1.25em;
+}
+
+.stupid {
     position: relative;
-    top: -27px;
-    flex-wrap: nowrap;
-    transition-duration: 0.333s;
-}
-
-.container {
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 10px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.25);
-    padding: 15px;
-}
-
-#dimensionamount {
-    padding-left: 100px;
-}
-
-#dimensionbought {
-    padding-left: 100px;
-}
-
-#dimensionmult {
-    padding-left: 100px;
-}
-
-#dimensionbuy {
-    padding-left: 500px;
-}
-
-.dim {
-    font-size: 15px;
-    color:lightgray;
-    display: inline-block;
-}
-
-.dimbuybutton {
-    all: unset;
-    font-size: 11px;
-    color: white;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: solid;
-    text-align: center;
-    border-width: 1px;
-    border-color: rgb(32, 128, 32);
-    width: 300px;
-    height: 19px;
-    display: inline;
-    position: relative;
-    flex-wrap: nowrap;
-    transition-duration: 0.333s;
-}
-
-.dimbuybutton:hover {
-    background-color: rgb(128, 255, 128);
-    color: black;
-    cursor: pointer;
-}
-
-.dimbuybuttondisabled {
-    all: unset;
-    font-size: 11px;
-    color: lightgray;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border: solid;
-    text-align: center;
-    border-width: 1px;
-    border-color: rgb(128, 64, 64);
-    width: 300px;
-    height: 19px;
-    display: inline;
-    position: relative;
-    flex-wrap: nowrap;
-    transition-duration: 0.333s;
-}
-
-#buydimcontainer {
-    position: absolute;
-    top: 237px;
-    left: 1280px;
-    line-height: 0px;
-}
-
-#dimboostbuy {
     float: right;
+    top: -0.1em;
+}
+
+#dimorder {
+    position: relative;
+    max-width: 1em;
+    bottom: 1em;
+    left: -1.5em;
+}
+
+#dimamount {
+    position: relative;
+    max-width: 1em;
+    bottom: 18.05em;
+    left: 12.5em;
+}
+
+#dimbought {
+    position: relative;
+    max-width: 1em;
+    left: 23.5em;
+    bottom: 35.1em;
+}
+
+#dimmult {
+    position: relative;
+    max-width: 1em;
+    left: 34em;
+    bottom: 52.22em;
+}
+
+#prestigecontainer {
+    position: relative;
+    right: 0.5em;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: solid;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: auto;
+    min-width: 116.5em;
+    height: 5em;
+}
+
+html {
+    margin: 0.5em;
+}
+
+.center {
+    display: table;
+    margin: auto;
 }

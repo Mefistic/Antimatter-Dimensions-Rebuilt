@@ -6,16 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti Dims Rebuilt</title>
     <script src="break_eternity.min.js"></script>
-    <script src="ui.js"></script>
     <script src="main.js"></script>
+    <script src="ui.js"></script>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <br>
+<div id="antimattertab" style="display:none">
 <div class="center">
     <div id="topcontainer">
         <span id="antimatter" class="antimattertext"></span><br>
-        <span id="antimatterpersec" class="antimatterpersectext"></span><br><p>.</p>
+        <span id="antimatterpersec" class="antimatterpersectext"></span><br>
+        <span id="buy10multi" class="antimatterpersectext"></span><br>
         <span id="tickspeed" class="tickspeed"></span><br>
         <span id="tickspeedeffect" class="tickspeedeffect"></span><br>
         <p>.</p>
@@ -106,6 +108,28 @@
         <button id="galaxy" class="buybuttondisabled" onclick="buygalaxy()"></button>
     </div>
     <span id="galaxyinfo" class="dimensioninfo"></span>
+</div>
+</div>
+</div>
+<div id="achievementstab" class="center">
+    <span class="antimattertext" style="font-size: 2em">Achievements</span>
+    <br><br>
+    <span id="achievementinfo" class="dimensioninfo"><br>Click on an achievement to see information about it.<br><br></span>
+    <br><br>
+    <div id="achievementscontainer">
+        <img src="achimg/achievement1.png" id="ach1" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[1]">
+        <img src="achimg/achievement2.png" id="ach2" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[2]">
+        <img src="achimg/achievement3.png" id="ach3" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[3]">
+        <img src="achimg/achievement4.png" id="ach4" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[4]">
+        <img src="achimg/achievement5.png" id="ach5" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[5]">
+        <img src="achimg/achievement6.png" id="ach6" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[6]">
+        <img src="achimg/achievement7.png" id="ach7" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[7]">
+        <img src="achimg/achievement8.png" id="ach8" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[8]">
+    </div>
+</div>
+<div id="navcontainer" style="display: box;">
+    <button id="antimatterbutton" onclick="game.tab = 'antimatter'">Antimatter</button>
+    <button id="achievementsbutton" onclick="game.tab = 'achievements'; game.hasunseenachievement = false">Achievements</button>
 </div>
 </body>
 </html>

@@ -23,7 +23,7 @@ body {
     text-align: center;
     font-size: 2em;
     color: white;
-    text-shadow: 0 0 0.1em rgb(204, 156, 255), 0 0 0.5em rgb(180, 110, 255);
+    text-shadow: 0 0 0.25em rgb(255, 167, 167), 0 0 0.5em rgb(255, 47, 47);
 }
 
 .antimatterpersectext {
@@ -158,6 +158,95 @@ p {
     width: auto;
     min-width: 116.5em;
     height: 5em;
+}
+
+#navcontainer {
+    position: absolute;
+    right: 0.5em;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: solid;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: 97.35vw;
+    height: 1em;
+    top: 93vh;
+}
+
+#antimatterbutton {
+    all: unset;
+    font-size: 1em;
+    color: white;
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 0.1em;
+    border-color: rgb(255, 49, 49);
+    width: 10em;
+    height: auto;
+    min-height: 2em;
+    display: inline;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+#antimatterbutton:hover {
+    color: black;
+    background-color: rgb(255, 49, 49);
+}
+
+#achievementsbutton {
+    all: unset;
+    font-size: 1em;
+    color: white;
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 0.1em;
+    border-color: rgb(64, 255, 96);
+    width: 10em;
+    height: auto;
+    min-height: 2em;
+    display: inline;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+#achievementsbutton:hover {
+    color: black;
+    background-color: rgb(64, 255, 96);;
+}
+
+#achievementstab {
+    text-align: center;
+}
+
+#achievementscontainer {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: solid;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: 44.21em;
+    height: 5em;
+    text-align: left;
+}
+
+.achievementunseen {
+    background-color: rgb(64, 255, 255); border-color: rgb(64, 255, 255); color: black;
+}
+
+.achievementunseen:hover {
+    background-color: white;
 }
 
 html {

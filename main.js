@@ -17,8 +17,10 @@ let game = {
         cost: new Decimal(0),
         effect: new Decimal(0)
     },
-    d: []
+    d: [],
 }
+
+const ach = ['1', '2', '3', '4', '5', '6', '7', '8']
 
 const dims = ['1', '2', '3', '4', '5', '6', '7', '8']
 
@@ -48,23 +50,30 @@ function updatecosts() {
     for (let i of dims) {
             game.d[i].cost1 = (new Decimal(dimbasecosts[j]).mul(new Decimal(game.d[i].costscale).pow(new Decimal(game.d[i].bought).div(10).floor())))
             if (new Decimal(game.d[i].bought).greaterThanOrEqualTo(100)) {
-                game.d[i].cost1 = new Decimal(game.d[i].cost1).mul(new Decimal(10).pow((game.d[i].bought.sub(100))))
+                game.d[i].cost1 = new Decimal(game.d[i].cost1).tetrate(1.002515)
             }
             game.d[i].cost10 = (new Decimal(game.d[i].cost1).mul(new Decimal(10).sub(new Decimal(game.d[i].bought).div(10).floor().mul(10).sub(new Decimal(game.d[i].bought)).abs())))
             j++
     }
-    game.tickspeed.cost = (new Decimal(10).pow((new Decimal(game.tickspeed.amount)).add(3)))
-    if (new Decimal(game.tickspeed.amount).greaterThanOrEqualTo(50)) {
-        game.tickspeed.cost = new Decimal(game.tickspeed.cost).mul(new Decimal(10).pow((game.tickspeed.amount.sub(50))))
+    game.tickspeed.cost = new Decimal(10).pow((new Decimal(game.tickspeed.amount)).add(3))
+    if (new Decimal(game.tickspeed.amount).greaterThanOrEqualTo(100)) {
+        game.tickspeed.cost = new Decimal(game.tickspeed.cost).tetrate(1.002515)
     }
     game.dimboost.cost = (new Decimal(20).add(new Decimal(20).mul(new Decimal(game.dimboost.amount)))).mul((new Decimal(1).add((new Decimal(game.dimboost.amount)).div(40)))).div(10).floor().mul(10)
-    game.galaxy.cost = (new Decimal(40).add(new Decimal(40).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(5)))).div(10).floor().mul(10)
+    game.galaxy.cost = (new Decimal(40).add(new Decimal(40).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(50)))).div(10).floor().mul(10)
+    if (game.ach[7].unlocked) {
+        game.galaxy.cost = new Decimal(game.galaxy.cost).sub(10)
+    }
 }
 
 function updatemult() {
+    if (game.ach[4].unlocked) {
+        game.buy10multi = new Decimal(3)
+    }
     game.dimboost.effect = new Decimal(game.dimboost.amount).div(2)
+    game.buy10multi = game.buy10multi.add(game.dimboost.effect)
     for (let i of dims) {
-        game.d[i].mult = (new Decimal(2).add(new Decimal(game.dimboost.effect))).pow(new Decimal(game.d[i].bought).div(10).floor())
+        game.d[i].mult = (new Decimal(game.buy10multi).pow(new Decimal(game.d[i].bought).div(10).floor()))
     }
     game.galaxy.effect = (new Decimal(game.galaxy.amount)).div(20)
     game.tickspeed.effect = (new Decimal(1.1).add(new Decimal(game.galaxy.effect))).pow(new Decimal(game.tickspeed.amount))
@@ -99,8 +108,18 @@ function dimboost() {
         for (let i = 1; i < 9; i++) {
             game.d[i].amount = new Decimal(0)
             game.d[i].bought = new Decimal(0)
-            game.tickspeed.amount = new Decimal(0)
-            game.anti = new Decimal(100)
+        }
+        checkachievements()
+        game.tickspeed.amount = new Decimal(0)
+        game.anti = new Decimal(100)
+        if (game.ach[3].unlocked) {
+            game.anti = new Decimal(1e5)
+        }
+        if (game.ach[5].unlocked) {
+            game.tickspeed.amount = new Decimal(10)
+        }
+        if (game.ach[6].unlocked) {
+            game.anti = new Decimal(1e10)
         }
         game.dimboost.amount = new Decimal(game.dimboost.amount).add(1)
     }
@@ -112,8 +131,18 @@ function buygalaxy() {
             game.d[i].amount = new Decimal(0)
             game.d[i].bought = new Decimal(0)
         }
+        checkachievements()
         game.tickspeed.amount = new Decimal(0)
-        game.anti = new Decimal(1e5)
+        game.anti = new Decimal(100)
+        if (game.ach[3].unlocked) {
+            game.anti = new Decimal(1e5)
+        }
+        if (game.ach[5].unlocked) {
+            game.tickspeed.amount = new Decimal(10)
+        }
+        if (game.ach[6].unlocked) {
+            game.anti = new Decimal(1e10)
+        }
         game.dimboost.amount = new Decimal(game.dimboost.amount).sub(4).max(0)
         game.galaxy.amount = new Decimal(game.galaxy.amount).add(1)
     }
@@ -129,6 +158,12 @@ function buytickspeed() {
 function short(num) {
     num = new Decimal(num)
     num = num.mul(1.0000001)
+    if (num.greaterThanOrEqualTo("1.79e308")) {
+    if (game.breakinfinity == false) {
+        num = "infinite"
+        return num
+    }
+}
     if (num.greaterThanOrEqualTo("e1.797e308")) {
         num = "eee" + num.mag.toFixed(5)
         return num
@@ -165,10 +200,46 @@ window.addEventListener('keydown', (event) => {
     }
 })
 
+function checkachievements() {
+    if (new Decimal(game.d[1].bought).greaterThanOrEqualTo(1) && game.ach[1].unlocked == false) {
+        game.ach[1].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(1) && game.ach[2].unlocked == false) {
+        game.ach[2].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(4) && game.ach[3].unlocked == false) {
+        game.ach[3].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(8) && game.ach[4].unlocked == false) {
+        game.ach[4].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.galaxy.amount).greaterThanOrEqualTo(1) && game.ach[5].unlocked == false) {
+        game.ach[5].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.galaxy.amount).greaterThanOrEqualTo(2) && game.ach[6].unlocked == false) {
+        game.ach[6].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.galaxy.amount).greaterThanOrEqualTo(3) && game.ach[7].unlocked == false) {
+        game.ach[7].unlocked = true
+        game.hasunseenachievement = true
+    }
+    if (new Decimal(game.anti).greaterThanOrEqualTo("1.79e308") && game.ach[8].unlocked == false) {
+        game.ach[8].unlocked = true
+        game.hasunseenachievement = true
+    }
+}
+
 function tick() {
     updatecosts()
     updatemult()
     generate()
+    checkachievements()
     updateui()
 }
 
@@ -182,6 +253,28 @@ function save() {
 
 if (localStorage.length !== 0) {
     game = JSON.parse(localStorage.getItem('game'))
+}
+
+if (game.breakinfinity == undefined) {
+    game.breakinfinity = false
+}
+
+if (game.ach == undefined) {
+    game.ach = []
+
+    for (i = 1 ; i < 9; i++) {
+        game.ach[i] = {
+            unlocked: false
+        }
+    }
+}
+
+if (game.hasunseenachievement == undefined) {
+    game.hasunseenachievement = false
+}
+
+if (game.buy10multi == undefined) {
+    game.buy10multi = new Decimal(2)
 }
 
 setInterval(() => {

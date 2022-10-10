@@ -67,6 +67,7 @@ function updatecosts() {
 }
 
 function updatemult() {
+	game.buy10multi = new Decimal(2)
     if (game.ach[4].unlocked) {
         game.buy10multi = new Decimal(3)
     }

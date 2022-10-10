@@ -88,6 +88,7 @@ body {
 .buybuttonenabled:hover {
     background-color: rgb(128, 255, 128);
     color: black;
+    transform: scale(1.1, 1.1);
 }
 
 p {
@@ -197,6 +198,7 @@ p {
 #antimatterbutton:hover {
     color: black;
     background-color: rgb(255, 49, 49);
+    transform: scale(1.1, 1.1);
 }
 
 #achievementsbutton {
@@ -221,7 +223,8 @@ p {
 
 #achievementsbutton:hover {
     color: black;
-    background-color: rgb(64, 255, 96);;
+    background-color: rgb(64, 255, 96);
+    transform: scale(1.1, 1.1);
 }
 
 #achievementstab {
@@ -245,8 +248,150 @@ p {
     background-color: rgb(64, 255, 255); border-color: rgb(64, 255, 255); color: black;
 }
 
-.achievementunseen:hover {
-    background-color: white;
+#bigcrunchbutton {
+    all: unset;
+    font-size: 8em;
+    position: relative;
+    top: 25vh;
+    color: black;
+    border-radius: 0.5em;
+    background-color: rgba(255, 255, 255, 1);
+    border: solid;
+    text-align: center;
+    border-width: 0.15em;
+    border-color: rgb(255, 159, 34);
+    width: auto;
+    height: auto;
+    min-height: 2em;
+    display: inline;
+    flex-wrap: nowrap;
+    padding: 0.2em 1em;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+#bigcrunchbutton:hover {
+    transform: scale(1.5, 1.5);
+}
+
+#infinitybutton {
+    all: unset;
+    font-size: 1em;
+    color: white;
+    border-radius: 0.5em;
+    background-color: rgba(0, 0, 0, 0.1);
+    border: solid;
+    text-align: center;
+    border-width: 0.1em;
+    border-color: rgb(255, 187, 0);
+    width: 10em;
+    height: auto;
+    min-height: 2em;
+    display: inline;
+    flex-wrap: nowrap;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+#infinitybutton:hover {
+    color: black;
+    background-color: rgb(255, 187, 0);
+    transform: scale(1.1, 1.1);
+}
+
+.ipglow {
+    all: unset;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    text-shadow: 0 0 0.25em rgb(255, 182, 122), 0 0 0.5em rgb(255, 123, 47);
+}
+
+#infupgcontainer {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: solid;
+    border-radius: 0.5em;
+    border-width: 0.1em;
+    border-color: rgba(0, 0, 0, 0.5);
+    padding: 1em;
+    width: auto;
+    height: auto;
+    text-align: center;
+}
+
+.infupgdisabled {
+    all: unset;
+    font-size: 0.75em;
+    position: relative;
+    color: gray;
+    border-radius: 0.5em;
+    background-color: rgb(0, 0, 0);
+    border: solid;
+    text-align: center;
+    border-width: 0.15em;
+    border-color: black;
+    width: 50em;
+    height: 6em;
+    min-height: 2em;
+    display: inline;
+    word-wrap: normal;
+    padding: 1em;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+.infupgenabled {
+    all: unset;
+    font-size: 0.75em;
+    position: relative;
+    color: white;
+    border-radius: 0.5em;
+    background-color: black;
+    border: solid;
+    text-align: center;
+    border-width: 0.15em;
+    border-color: rgb(255, 187, 34);
+    width: 50em;
+    height: 6em;
+    min-height: 2em;
+    display: inline;
+    word-wrap: normal;
+    padding: 1em;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
+}
+
+.infupgenabled:hover {
+    background-color: rgb(255, 187, 0);
+    color:black;
+    transform: scale(1.1, 1.1);
+}
+
+.infupgbought {
+    all: unset;
+    font-size: 0.75em;
+    position: relative;
+    color: white;
+    border-radius: 0.5em;
+    background-color: rgb(29, 53, 25);
+    border: solid;
+    text-align: center;
+    border-width: 0.15em;
+    border-color: rgb(41, 255, 34);
+    width: 50em;
+    height: 6em;
+    min-height: 2em;
+    display: inline;
+    word-wrap: normal;
+    padding: 1em;
+    transition-duration: 0.333s;
+    position: relative;
+    bottom: 0.5em;
 }
 
 html {

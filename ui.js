@@ -1,8 +1,10 @@
-let achievementinfo = [0, 'Antimatter<br><br>Get Your First Dimension.<br>Effect: No Effect.', 'Boosting<br><br>Get Your First Dimension Boost.<br>Effect: Start With 100 Antimatter.', 'Boosting More<br><br>Get 4 Dimension Boosts.<br>Effect: Start With 1.00e5 Antimatter.', 'Boosting a Lot<br><br>Get 8 Dimension Boosts.<br>Effect: Permanent +1.00 Buy 10 Multiplier', 'Galactical<br><br>Get an Antimatter Galaxy.<br>Effect: You start with 10 Tickspeed Upgrades.', 'Supergalactical<br><br>Get 2 Antimatter Galaxies<br>Effect: Start With 1.00e10 Antimatter.', 'Hypergalactical<br><br>Get 3 Antimatter Galaxies<br>Effect: Galaxies Are 10 Dimensions Cheaper.', 'Infinity<br><br>Reach ' + short(1.79e308) + ' Antimatter.<br>Effect: 10x Multiplier on All Dimensions.']
+let achievementinfo = [0, 'Antimatter<br><br>Get Your First Dimension.<br>Effect: No Effect.', 'Boosting<br><br>Get Your First Dimension Boost.<br>Effect: Start With +100 Antimatter.', 'Boosting More<br><br>Get 4 Dimension Boosts.<br>Effect: Start With +1.00e3 Antimatter.', 'Boosting a Lot<br><br>Get 8 Dimension Boosts.<br>Effect: Permanent +1.00 Buy 10 Multiplier', 'Galactical<br><br>Get an Antimatter Galaxy.<br>Effect: You start with 10 Tickspeed Upgrades.', 'Supergalactical<br><br>Get 2 Antimatter Galaxies<br>Effect: Start With +1.00e6 Antimatter.', 'Hypergalactical<br><br>Get 3 Antimatter Galaxies<br>Effect: Galaxies Are 10 Dimensions Cheaper.', 'Infinity<br><br>Big Crunch for the First Time.<br>Effect: Unlock the Infinity Tab.']
 
 function updateui() {
     document.getElementById("antimattertab").style = "display: none;"
     document.getElementById("achievementstab").style = "display: none;"
+    document.getElementById("bigcrunch").style = "display: none;"
+    document.getElementById("infinitytab").style = "display: none;"
     if (game.tab == "antimatter") {
         
         document.getElementById("antimattertab").style = "display: box;"
@@ -63,7 +65,10 @@ function updateui() {
         else{
             document.getElementById("dimboost").className = 'buybuttondisabled'
         }
-        document.getElementById("dimboostinfo").innerHTML = 'You have ' + short(game.dimboost.amount) + ' Dimension Boosts, adding +' + short(new Decimal(game.dimboost.amount).div(2)) + ' to the buy 10 multiplier. <span style="font-size:0.6em">(Resets Antimatter, All Dimensions and Tickspeed)</span>'
+        document.getElementById("dimboostinfo").innerHTML = 'You have ' + short(game.dimboost.amount) + ' Dimension Boosts, adding +' + short(new Decimal(game.dimboost.effect)) + ' to the buy 10 multiplier. <span style="font-size:0.6em">(Resets Antimatter, All Dimensions and Tickspeed)</span>'
+        if (game.infupg[3].bought) {
+            document.getElementById("dimboostinfo").innerHTML = 'You have ' + short(game.dimboost.amount) + ' Infinity Boosts, adding +' + short(new Decimal(game.dimboost.effect)) + ' to the buy 10 multiplier. <span style="font-size:0.6em">(Resets Antimatter, All Dimensions and Tickspeed)</span>'
+        }
 
         document.getElementById("galaxy").innerHTML = 'Cost: ' + short(game.galaxy.cost) + ' 8th Dimensions Bought'
         if (new Decimal(game.d[8].bought).greaterThanOrEqualTo(game.galaxy.cost)) {
@@ -73,6 +78,9 @@ function updateui() {
             document.getElementById("galaxy").className = 'buybuttondisabled'
         }
         document.getElementById("galaxyinfo").innerHTML = 'You have ' + short(game.galaxy.amount) + ' Antimatter Galaxies, adding +' + short(game.galaxy.effect) + ' to the tickspeed multiplier. <span style="font-size:0.6em">(Resets Antimatter, All Dimensions, Tickspeed and Removes 4 Dimensions Boosts)</span>'
+        if (game.infupg[4].bought) {
+            document.getElementById("galaxyinfo").innerHTML = 'You have ' + short(game.galaxy.amount) + ' Infinity Galaxies, adding +' + short(game.galaxy.effect) + ' to the tickspeed multiplier. <span style="font-size:0.6em">(Resets Antimatter, All Dimensions, Tickspeed and Removes 4 Dimensions Boosts)</span>'
+        }
     }
     if (game.tab == "achievements") {
         document.getElementById("achievementstab").style = "display: box;"
@@ -85,11 +93,34 @@ function updateui() {
             }
         }
     }
+    if (game.tab == "infinity") {
+        document.getElementById("infinitytab").style = "display: box;"
+        document.getElementById("infinitypoints").innerHTML = "You have <span class='ipglow'>" + short(game.ip) + "</span> Infinity Points."
+        for (i = 1; i < 10; i++) {
+            if (new Decimal(game.ip).greaterThanOrEqualTo(new Decimal(game.infupg[i].cost))) {
+                document.getElementById("infupg" + i).className = "infupgenabled"
+            }
+            else {
+                document.getElementById("infupg" + i).className = "infupgdisabled"
+            }
+            if (i == 9) {break}
+            if (game.infupg[i].bought == true) {
+                document.getElementById("infupg" + i).className = "infupgbought"
+            }
+        }
+        document.getElementById("infupg9").innerHTML = "Multiply IP Gain by 2.00x.<br>Currently: " + short(new Decimal(2).pow(new Decimal(game.infupg[9].bought))) + "x<br>Cost: " + short(game.infupg[9].cost) + " IP"
+    }
     document.getElementById("navcontainer").style = "display: box;"
     if (game.hasunseenachievement) {
         document.getElementById("achievementsbutton").style = "background-color: rgb(64, 255, 255); border-color: rgb(64, 255, 255); color: black;"
     }
     else {
         document.getElementById("achievementsbutton").style = "display: box"
+    }
+    if (game.tab == "bigcrunch") {
+        document.getElementById("bigcrunch").style = "display: box;"
+    }
+    if (game.ach[8].unlocked) {
+        document.getElementById("infinitybutton").style = "display: box;"
     }
 }

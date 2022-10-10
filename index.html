@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anti Dims Rebuilt</title>
+    <meta http-equiv="Cache-control" content="must-revalidate" max-age="0">
     <script src="break_eternity.min.js"></script>
     <script src="main.js"></script>
     <script src="ui.js"></script>
@@ -111,7 +112,7 @@
 </div>
 </div>
 </div>
-<div id="achievementstab" class="center">
+<div id="achievementstab" class="center" style="display:none">
     <span class="antimattertext" style="font-size: 2em">Achievements</span>
     <br><br>
     <span id="achievementinfo" class="dimensioninfo"><br>Click on an achievement to see information about it.<br><br></span>
@@ -127,9 +128,35 @@
         <img src="achimg/achievement8.png" id="ach8" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[8]">
     </div>
 </div>
+<div id="infinitytab" style="display:none;" class="center">
+    <br>
+    <div class="center">
+    <span id="infinitypoints" class="antimattertext"></span>
+    </div>
+    <br><br><br>
+    <div id="infupgcontainer">
+        <button id="infupg1" onclick="buyinfupg(1)" class="infupgdisabled">1st Dim Multiplier Boosts 8th Dim's Multiplier With Reduced Effect.<br> Cost: 1 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <button id="infupg2" onclick="buyinfupg(2)" class="infupgdisabled">8th Dim Multiplier Boosts 1st Dim's Multiplier With Reduced Effect.<br> Cost: 1 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <br><br>
+        <button id="infupg3" onclick="buyinfupg(3)" class="infupgdisabled">Dimension Boosts are 2.00x More Effective.<br> Cost: 2.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <button id="infupg4" onclick="buyinfupg(4)" class="infupgdisabled">Antimatter Galaxies are 2.00x More Effective.<br> Cost: 2.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <br><br>
+        <button id="infupg5" onclick="buyinfupg(5)" class="infupgdisabled">Antimatter Galaxies are 9 Dimensions Cheaper.<br> Cost: 4.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <button id="infupg6" onclick="buyinfupg(6)" class="infupgdisabled">Dimension Boosts are 9 Dimensions Cheaper.<br> Cost: 4.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <br><br>
+        <button id="infupg7" onclick="buyinfupg(7)" class="infupgdisabled">You Start With an Antimatter Galaxy.<br> Cost: 8.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <button id="infupg8" onclick="buyinfupg(8)" class="infupgdisabled">You Start With 4 Dimension Boosts.<br> Cost: 8.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
+        <br><br>
+        <button id="infupg9" onclick="buyinfupg9()" class="infupgdisabled">Multiply IP Gain by 2.00x.<br>Currently: 1.00x<br> Cost: 16.00 IP</button>
+    </div>
+</div>
 <div id="navcontainer" style="display: box;">
     <button id="antimatterbutton" onclick="game.tab = 'antimatter'">Antimatter</button>
     <button id="achievementsbutton" onclick="game.tab = 'achievements'; game.hasunseenachievement = false">Achievements</button>
+    <button id="infinitybutton" onclick="game.tab = 'infinity'" style="display:none;">Infinity</button>
+</div>
+<div id="bigcrunch" class="center" style="display:none">
+    <button id="bigcrunchbutton" onclick="crunch()">Big Crunch</button>
 </div>
 </body>
 </html>

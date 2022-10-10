@@ -71,7 +71,7 @@ function updatemult() {
         game.buy10multi = new Decimal(3)
     }
     game.dimboost.effect = new Decimal(game.dimboost.amount).div(2)
-    game.buy10multi = game.buy10multi.add(game.dimboost.effect)
+    game.buy10multi = new Decimal(game.buy10multi).add(new Decimal(game.dimboost.effect))
     for (let i of dims) {
         game.d[i].mult = (new Decimal(game.buy10multi).pow(new Decimal(game.d[i].bought).div(10).floor()))
     }

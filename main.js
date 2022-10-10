@@ -74,17 +74,18 @@ function updatecosts() {
     for (let i of dims) {
             game.d[i].cost1 = (new Decimal(dimbasecosts[j]).mul(new Decimal(game.d[i].costscale).pow(new Decimal(game.d[i].bought).div(10).floor())))
             if (new Decimal(game.d[i].bought).greaterThanOrEqualTo(10)) {
-            game.d[i].cost1 = new Decimal(game.d[i].cost1).tetrate(1.0014)
+            game.d[i].cost1 = (game.d[i].cost1).tetrate(1.0015)
             }
             game.d[i].cost10 = (new Decimal(game.d[i].cost1).mul(new Decimal(10).sub(new Decimal(game.d[i].bought).div(10).floor().mul(10).sub(new Decimal(game.d[i].bought)).abs())))
             j++
     }
     game.tickspeed.cost = new Decimal(10).pow((new Decimal(game.tickspeed.amount)).add(3))
     if (new Decimal(game.tickspeed.amount).greaterThanOrEqualTo(1)) {
-    game.tickspeed.cost = new Decimal(game.tickspeed.cost).tetrate(1.0014)
+    game.tickspeed.cost = new Decimal(game.tickspeed.cost).tetrate(1.00125)
     }
-    game.dimboost.cost = (new Decimal(20).add(new Decimal(20).mul(new Decimal(game.dimboost.amount)))).mul((new Decimal(1).add((new Decimal(game.dimboost.amount)).div(40)))).div(10).floor().mul(10)
-    game.galaxy.cost = (new Decimal(20).add(new Decimal(40).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(50)))).div(10).floor().mul(10)
+    game.dimboost.cost = (new Decimal(20).add(new Decimal(20).mul(new Decimal(game.dimboost.amount)))).mul((new Decimal(1).add((new Decimal(game.dimboost.amount)).div(2)))).div(10).floor().mul(10)
+    game.galaxy.cost = (new Decimal(20).add(new Decimal(40).mul(new Decimal(game.galaxy.amount)))).mul((new Decimal(1).add((new Decimal(game.galaxy.amount)).div(10)))).div(10).floor().mul(10)
+    if (new Decimal(game.dimboost.cost).greaterThanOrEqualTo(300)) {game.dimboost.cost = new Decimal(game.dimboost.cost).pow(1.05).div(10).floor().mul(10)}
     if (game.ach[7].unlocked) {
         game.galaxy.cost = new Decimal(game.galaxy.cost).sub(10)
     }
@@ -102,9 +103,6 @@ function updatecosts() {
 
 function updatemult() {
     game.buy10multi = new Decimal(2)
-    if (game.ach[4].unlocked) {
-        game.buy10multi = new Decimal(3)
-    }
     game.dimboost.effect = new Decimal(game.dimboost.amount).div(2)
     if (game.infupg[3].bought) {
         game.dimboost.effect = new Decimal(game.dimboost.effect).mul(2)
@@ -122,7 +120,7 @@ function updatemult() {
         game.d[1].mult = new Decimal(game.d[1].mult).mul(new Decimal(game.d[8].mult).tetrate(0.1))
     }
     if (game.infupg[2].bought) {
-        game.d[8].mult = new Decimal(game.d[8].mult).mul(new Decimal(game.d[1].mult).tetrate(0.1))
+        game.d[8].mult = new Decimal(game.d[8].mult).mul(new Decimal(game.d[1].mult).tetrate(0.5))
     }
 }
 
@@ -163,11 +161,14 @@ function dimboost() {
         if (game.ach[3].unlocked) {
             game.anti = new Decimal(game.anti).add(new Decimal(1000))
         }
+        if (game.ach[4].unlocked) {
+            game.anti = new Decimal(game.anti).add(new Decimal(1e5))
+        }
         if (game.ach[5].unlocked) {
             game.tickspeed.amount = new Decimal(10)
         }
         if (game.ach[6].unlocked) {
-            game.anti = new Decimal(game.anti).add(new Decimal(1000000))
+            game.anti = new Decimal(game.anti).add(new Decimal(1e10))
         }
     }
 }
@@ -184,6 +185,9 @@ function buygalaxy() {
         game.anti = new Decimal(110)
         if (game.ach[3].unlocked) {
             game.anti = new Decimal(game.anti).add(new Decimal(1000))
+        }
+        if (game.ach[4].unlocked) {
+            game.anti = new Decimal(game.anti).add(new Decimal(1e5))
         }
         if (game.ach[5].unlocked) {
             game.tickspeed.amount = new Decimal(10)
@@ -256,11 +260,11 @@ function checkachievements() {
         game.ach[2].unlocked = true
         game.hasunseenachievement = true
     }
-    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(4) && game.ach[3].unlocked == false) {
+    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(2) && game.ach[3].unlocked == false) {
         game.ach[3].unlocked = true
         game.hasunseenachievement = true
     }
-    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(8) && game.ach[4].unlocked == false) {
+    if (new Decimal(game.dimboost.amount).greaterThanOrEqualTo(4) && game.ach[4].unlocked == false) {
         game.ach[4].unlocked = true
         game.hasunseenachievement = true
     }
@@ -294,17 +298,20 @@ function crunch() {
         game.d[i].amount = new Decimal(0)
         game.d[i].bought = new Decimal(0)
     }
-    game.anti = new Decimal(110)
-    if (game.ach[3].unlocked) {
-        game.anti = new Decimal(game.anti).add(new Decimal(1000))
-    }
-    if (game.ach[6].unlocked) {
-        game.anti = new Decimal(game.anti).add(new Decimal(1000000))
-    }
     game.galaxy.amount = new Decimal(0)
     game.dimboost.amount = new Decimal(0)
+    game.anti = new Decimal(110)
+    if (game.ach[3].unlocked) {
+        game.anti = new Decimal(game.anti).add(new Decimal(1e3))
+    }
     if (game.ach[5].unlocked) {
         game.tickspeed.amount = new Decimal(10)
+    }
+    if (game.ach[4].unlocked) {
+        game.anti = new Decimal(game.anti).add(new Decimal(1e5))
+    }
+    if (game.ach[6].unlocked) {
+        game.anti = new Decimal(game.anti).add(new Decimal(1e10))
     }
     if (game.infupg[7].bought) {
         game.galaxy.amount = new Decimal(game.galaxy.amount).add(1)

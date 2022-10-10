@@ -394,6 +394,11 @@ p {
     bottom: 0.5em;
 }
 
+#discord {
+    position: relative;
+    bottom: 2em;
+}
+
 html {
     margin: 0.5em;
 }

@@ -2,162 +2,191 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Anti Dims Rebuilt</title>
-    <meta http-equiv="Cache-control" content="must-revalidate" max-age="0">
-    <script src="break_eternity.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="break_eternity.js"></script>
     <script src="main.js"></script>
-    <script src="ui.js"></script>
-    <link rel="stylesheet" href="styles.css">
+    <title>AntiDims Rebuilt</title>
 </head>
 <body>
-<br>
-<div id="antimattertab" style="display:none">
-<a target="_blank" class="antimattertext" style="position:relative; top: -2em" href="https://discord.gg/yDSXx6q2j6"><b>Discord</b></a>
-<div class="center">
-    <div id="topcontainer">
-        <span id="antimatter" class="antimattertext"></span><br>
-        <span id="antimatterpersec" class="antimatterpersectext"></span><br>
-        <span id="buy10multi" class="antimatterpersectext"></span><br>
-        <span id="tickspeed" class="tickspeed"></span><br>
-        <span id="tickspeedeffect" class="tickspeedeffect"></span><br>
-        <p>.</p>
-        <button id="tickspeedbuy" class="buybuttondisabled" onclick="buytickspeed()"></button>
+<div id="antimattertab" style="display: none;">
+    <div id="currencycontainer">
+        <p>You have </span><span id="antimatter"></span><span> Antimatter.</p>
     </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<div id="dimensioncontainer">
-    <div class="stupid">
-    <br><br>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 1)" id="1d1"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 1)" id="10d1"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 2)" id="1d2"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 2)" id="10d2"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 3)" id="1d3"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 3)" id="10d3"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 4)" id="1d4"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 4)" id="10d4"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 5)" id="1d5"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 5)" id="10d5"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 6)" id="1d6"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 6)" id="10d6"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 7)" id="1d7"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 7)" id="10d7"></button><br><p>.</p>
-    <button class="buybuttondisabled" class="stupid" onclick="buy(1, 8)" id="1d8"></button><span> </span><button class="buybuttondisabled" class="stupid" onclick="buy(10, 8)" id="10d8"></button>
-    </div>
-<div style="line-height: 2.2em; max-height: 1em;">
-    <div id="dimorder" class="dimensioninfo">
-        <ul style="list-style-type:none;">
-            <li>Dimension</li>
-            <p></p>
-            <li>1st<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>2nd<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>3rd<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>4th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>5th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>6th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>7th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-            <li>8th<span style="color: rgba(0, 0, 0, 0)">.</span>Dimension</li>
-        </ul>
-    </div>
-    <div id="dimamount" class="dimensioninfo">
-        <ul style="list-style-type:none;">
-        <li><span>Amount</span></li>
+    <div id="tscontainer">
+        <p>Tickspeed: <span id="tickspeed"></span></p>
+        <p>Increase Tickspeed by <span id="tickspeedincrease"></span><span>x</span></p>
+        <button id="buytickspeed" class="buttondisabled" onclick="buytickspeed()"></button>
         <p></p>
-        <li><span id="amountd1"></span></li>
-        <li><span id="amountd2"></span></li>
-        <li><span id="amountd3"></span></li>
-        <li><span id="amountd4"></span></li>
-        <li><span id="amountd5"></span></li>
-        <li><span id="amountd6"></span></li>
-        <li><span id="amountd7"></span></li>
-        <li><span id="amountd8"></span></li>
-        </ul>
     </div>
-    <div id="dimbought" class="dimensioninfo">
-        <ul style="list-style-type:none;">
-        <li><span>Bought</span></li>
-        <p></p>
-        <li><span id="boughtd1"></span></li>
-        <li><span id="boughtd2"></span></li>
-        <li><span id="boughtd3"></span></li>
-        <li><span id="boughtd4"></span></li>
-        <li><span id="boughtd5"></span></li>
-        <li><span id="boughtd6"></span></li>
-        <li><span id="boughtd7"></span></li>
-        <li><span id="boughtd8"></span></li>
-        </ul>
+    <div style="display:flex;justify-content:center">
+    <div id="dimensioncontainer" style="margin: 0 1em;">
+        <p>Dimension</p>
+        <p>1st Dimension</p>
+        <p>2nd Dimension</p>
+        <p>3rd Dimension</p>
+        <p>4th Dimension</p>
+        <p>5th Dimension</p>
+        <p>6th Dimension</p>
+        <p>7th Dimension</p>
+        <p>8th Dimension</p>
     </div>
-    <div id="dimmult" class="dimensioninfo">
-        <ul style="list-style-type:none;">
-        <li><span>Multiplier</span></li>
-        <p></p>
-        <li><span id="multd1"></span></li>
-        <li><span id="multd2"></span></li>
-        <li><span id="multd3"></span></li>
-        <li><span id="multd4"></span></li>
-        <li><span id="multd5"></span></li>
-        <li><span id="multd6"></span></li>
-        <li><span id="multd7"></span></li>
-        <li><span id="multd8"></span></li>
-        </ul>
+    <div id="dimensioncontainer">
+        <p>Amount</p>
+        <p id="d1amount"></p>
+        <p id="d2amount"></p>
+        <p id="d3amount"></p>
+        <p id="d4amount"></p>
+        <p id="d5amount"></p>
+        <p id="d6amount"></p>
+        <p id="d7amount"></p>
+        <p id="d8amount"></p>
     </div>
+    <div id="dimensioncontainer">
+        <p>Bought</p>
+        <p id="d1bought"></p>
+        <p id="d2bought"></p>
+        <p id="d3bought"></p>
+        <p id="d4bought"></p>
+        <p id="d5bought"></p>
+        <p id="d6bought"></p>
+        <p id="d7bought"></p>
+        <p id="d8bought"></p>
+    </div>
+    <div id="dimensioncontainer">
+        <p>Multiplier</p>
+        <p id="d1mult"></p>
+        <p id="d2mult"></p>
+        <p id="d3mult"></p>
+        <p id="d4mult"></p>
+        <p id="d5mult"></p>
+        <p id="d6mult"></p>
+        <p id="d7mult"></p>
+        <p id="d8mult"></p>
+    </div>
+    <div id="dimensioncontainer">
+        <p>Buy Dimensions</p>
+        <button id="d1buy" class="buttondisabled" onclick="buy(1)"></button><br>
+        <button id="d2buy" class="buttondisabled" onclick="buy(2)"></button><br>
+        <button id="d3buy" class="buttondisabled" onclick="buy(3)"></button><br>
+        <button id="d4buy" class="buttondisabled" onclick="buy(4)"></button><br>
+        <button id="d5buy" class="buttondisabled" onclick="buy(5)"></button><br>
+        <button id="d6buy" class="buttondisabled" onclick="buy(6)"></button><br>
+        <button id="d7buy" class="buttondisabled" onclick="buy(7)"></button><br>
+        <button id="d8buy" class="buttondisabled" onclick="buy(8)"></button>
+    </div>
+    </div><br>
+    <div id="prestigecontainer">
+        <span id="dimboost"></span><div style="float:right"><button id="buydimboost" class="buttondisabled" onclick="dimboost()" style="float:right"></button></div><br>
+        <span id="galaxy"></span><div style="float:right"><button id="buygalaxy" class="buttondisabled" onclick="galaxy()" style="float:right"></button></div>
+    </div><br>
 </div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><p>.</p><p>.</p>
-<div id="prestigecontainer">
-    <div class="stupid">
-        <button id="dimboost" class="buybuttondisabled" onclick="dimboost()"></button>
+<div id="infinitytab" style="display: none;">
+    <div id="currencycontainer">
+        <p>You have <span id="ip" class="ip"></span> Infinity Points.</p>
     </div>
-    <span id="dimboostinfo" class="dimensioninfo"></span><br><br>
-    <div class="stupid">
-        <button id="galaxy" class="buybuttondisabled" onclick="buygalaxy()"></button>
+    <div id="crunchcontainer">
+        <button id="crunch" onclick="crunch()">Big Crunch<br>+<span id="ipgain"></span> Infinity Points.</button>
     </div>
-    <span id="galaxyinfo" class="dimensioninfo"></span>
-</div>
-</div>
-</div>
-<div id="achievementstab" class="center" style="display:none">
-    <span class="antimattertext" style="font-size: 2em">Achievements</span>
-    <br><br>
-    <span id="achievementinfo" class="dimensioninfo"><br>Click on an achievement to see information about it.<br><br></span>
-    <br><br>
-    <div id="achievementscontainer">
-        <img src="achimg/achievement1.png" id="ach1" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[1]">
-        <img src="achimg/achievement2.png" id="ach2" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[2]">
-        <img src="achimg/achievement3.png" id="ach3" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[3]">
-        <img src="achimg/achievement4.png" id="ach4" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[4]">
-        <img src="achimg/achievement5.png" id="ach5" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[5]">
-        <img src="achimg/achievement6.png" id="ach6" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[6]">
-        <img src="achimg/achievement7.png" id="ach7" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[7]">
-        <img src="achimg/achievement8.png" id="ach8" style="width: 5em; height: 5em;" onclick="document.getElementById('achievementinfo').innerHTML = achievementinfo[8]">
-    </div>
-</div>
-<div id="infinitytab" style="display:none;" class="center">
-    <br>
-    <div class="center">
-    <span id="infinitypoints" class="antimattertext"></span>
-    </div>
-    <br><br><br>
     <div id="infupgcontainer">
-        <button id="infupg1" onclick="buyinfupg(1)" class="infupgdisabled">1st Dim Multiplier Boosts 8th Dim's Multiplier With Reduced Effect.<br> Cost: 1 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <button id="infupg2" onclick="buyinfupg(2)" class="infupgdisabled">8th Dim Multiplier Boosts 1st Dim's Multiplier With Reduced Effect.<br> Cost: 1 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <br><br>
-        <button id="infupg3" onclick="buyinfupg(3)" class="infupgdisabled">Dimension Boosts are 2.00x More Effective.<br> Cost: 2.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <button id="infupg4" onclick="buyinfupg(4)" class="infupgdisabled">Antimatter Galaxies are 2.00x More Effective.<br> Cost: 2.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <br><br>
-        <button id="infupg5" onclick="buyinfupg(5)" class="infupgdisabled">Antimatter Galaxies are 9 Dimensions Cheaper.<br> Cost: 4.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <button id="infupg6" onclick="buyinfupg(6)" class="infupgdisabled">Dimension Boosts are 9 Dimensions Cheaper.<br> Cost: 4.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <br><br>
-        <button id="infupg7" onclick="buyinfupg(7)" class="infupgdisabled">You Start With an Antimatter Galaxy.<br> Cost: 8.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <button id="infupg8" onclick="buyinfupg(8)" class="infupgdisabled">You Start With 4 Dimension Boosts.<br> Cost: 8.00 IP</button><span style="color:rgba(0,0,0,0)">....</span>
-        <br><br>
-        <button id="infupg9" onclick="buyinfupg9()" class="infupgdisabled">Multiply IP Gain by 2.00x.<br>Currently: 1.00x<br> Cost: 16.00 IP</button>
+        <button id="infupg1" onclick="buyinfupg(1)" class="infupgdisabled">1st Dimension Boosts Higher Dimensions.<br>Currently: <span id="infupg1effect"></span>x<br>Cost: 1 IP</button>
+        <button id="infupg2" onclick="buyinfupg(2)" class="infupgdisabled">8th Dimension Boosts Lower Dimensions.<br>Currently: <span id="infupg2effect"></span>x<br>Cost: 2 IP</button>
+        <button id="infupg3" onclick="buyinfupg(3)" class="infupgdisabled">Dimension Boosts are 15 Dimensions Cheaper.<br><br>Cost: 4 IP</button>
+        <button id="infupg4" onclick="buyinfupg(4)" class="infupgdisabled">Antimatter Galaxies are 25 Dimensions Cheaper.<br><br>Cost: 8 IP</button>
+        <button id="infupg5" onclick="buyinfupg(5)" class="infupgdisabled">Dimension Boosts are 2.00x Stronger.<br><br>Cost: 16 IP</button>
+    </div>
+    <div id="infupgcontainer">
+        <button id="infupg6" onclick="buyinfupg(6)" class="infupgdisabled">Antimatter Galaxies are 1.25x Stronger.<br><br>Cost: 24 IP</button>
+        <button id="infupg7" onclick="buyinfupg(7)" class="infupgdisabled">Multiplier to Dimensions Based on IP.<br>Currently: <span id="infupg7effect"></span>x<br>Cost: 32 IP</button>
+        <button id="infupg8" onclick="buyinfupg(8)" class="infupgdisabled">Multiplier to Dimensions Based on Time Played.<br>Currently: <span id="infupg8effect"></span>x<br>Cost: 40 IP</button>
+        <button id="infupg9" onclick="buyinfupg(9)" class="infupgdisabled">You start with 4 Dimension Boosts.<br><br>Cost: 48 IP</button>
+        <button id="infupg10" onclick="buyinfupg(10)" class="infupgdisabled">You start with 2 Antimatter Galaxies.<br><br>Cost: 64 IP</button>
     </div>
 </div>
-<div id="navcontainer" style="display: box;">
-    <button id="antimatterbutton" onclick="game.tab = 'antimatter'">Antimatter</button>
-    <button id="achievementsbutton" onclick="game.tab = 'achievements'; game.hasunseenachievement = false">Achievements</button>
-    <button id="infinitybutton" onclick="game.tab = 'infinity'" style="display:none;">Infinity</button>
+<div id="infdimensionstab" style="display: none">
+    <div id="currencycontainer">
+        <p>You have <span id="ip2" class="ip"></span> Infinity Points.</p>
+    </div><br>
+    <div id="currencycontainer">
+        <p>You have <span id="infpower" class="ip"></span> Infinity Power, Multiplying Antimatter Dimensions by <span id="infpowereffect"></span>x</p>
+    </div><br>
+    <div style="display:flex;justify-content:center">
+        <div id="dimensioncontainer" style="margin: 0 1em;">
+            <p>Infinity Dimensions</p>
+            <p>1st Dimension</p>
+            <p>2nd Dimension</p>
+            <p>3rd Dimension</p>
+            <p>4th Dimension</p>
+            <p>5th Dimension</p>
+            <p>6th Dimension</p>
+            <p>7th Dimension</p>
+            <p>8th Dimension</p>
+        </div>
+        <div id="dimensioncontainer">
+            <p>Amount</p>
+            <p id="id1amount"></p>
+            <p id="id2amount"></p>
+            <p id="id3amount"></p>
+            <p id="id4amount"></p>
+            <p id="id5amount"></p>
+            <p id="id6amount"></p>
+            <p id="id7amount"></p>
+            <p id="id8amount"></p>
+        </div>
+        <div id="dimensioncontainer">
+            <p>Bought</p>
+            <p id="id1bought"></p>
+            <p id="id2bought"></p>
+            <p id="id3bought"></p>
+            <p id="id4bought"></p>
+            <p id="id5bought"></p>
+            <p id="id6bought"></p>
+            <p id="id7bought"></p>
+            <p id="id8bought"></p>
+        </div>
+        <div id="dimensioncontainer">
+            <p>Multiplier</p>
+            <p id="id1mult"></p>
+            <p id="id2mult"></p>
+            <p id="id3mult"></p>
+            <p id="id4mult"></p>
+            <p id="id5mult"></p>
+            <p id="id6mult"></p>
+            <p id="id7mult"></p>
+            <p id="id8mult"></p>
+        </div>
+        <div id="dimensioncontainer">
+            <p>Buy Dimensions</p>
+            <button id="id1buy" class="buttondisabled" onclick="idbuy(1)"></button><br>
+            <button id="id2buy" class="buttondisabled" onclick="idbuy(2)"></button><br>
+            <button id="id3buy" class="buttondisabled" onclick="idbuy(3)"></button><br>
+            <button id="id4buy" class="buttondisabled" onclick="idbuy(4)"></button><br>
+            <button id="id5buy" class="buttondisabled" onclick="idbuy(5)"></button><br>
+            <button id="id6buy" class="buttondisabled" onclick="idbuy(6)"></button><br>
+            <button id="id7buy" class="buttondisabled" onclick="idbuy(7)"></button><br>
+            <button id="id8buy" class="buttondisabled" onclick="idbuy(8)"></button>
+        </div>
 </div>
-<div id="bigcrunch" class="center" style="display:none">
-    <button id="bigcrunchbutton" onclick="crunch()">Big Crunch</button>
+</div>
+<div id="achievementstab" style="display: none;">
+    <div id="achievementscontainer">
+        <div id="ach1" class="ach"><span>Antimatter<br><br>Have over 100 Antimatter.</span></div>
+        <div id="ach2" class="ach"><span>Boosting<br><br>Have a Dimension Boost.</span></div>
+        <div id="ach3" class="ach"><span>More Boosting<br><br>Have 2 Dimension Boosts.</span></div>
+        <div id="ach4" class="ach"><span>4 Times the Fun<br><br>Have 4 Dimension Boosts.</span></div>
+        <div id="ach5" class="ach"><span>Galaxies<br><br>Have an Antimatter Galaxy.</span></div>
+        <div id="ach6" class="ach"><span>There's Two Now<br><br>Have 2 Antimatter Galaxies.</span></div>
+        <div id="ach7" class="ach"><span>Infinity<br><br>Have over 1.79e308 Antimatter.</span></div>
+        <div id="ach8" class="ach"><span>Power<br><br></span>Have over 100 Infinity Power.</div>
+        <div id="ach9" class="ach"><span>Complete<br><br></span>Have all Infinity Upgrades.</div>
+        <div id="ach10" class="ach"><span>Infinity*2<br><br>Have 308 Infinities.</span></div>
+    </div>
+</div>
+<div id="navcontainer">
+    <button id="antimatternav" onclick="game.tab='antimatter'" class="antimatternav">Antimatter</button>
+    <button id="achievementnav" onclick="game.tab='achievements'" class="achievementnav">Achievements</button>
+    <button id="infinitynav" onclick="game.tab='infinity'" class="infinitynav" style="display:none">Infinity</button>
+    <button id="infdimensionsnav" onclick="game.tab='infdimensions'" class="infinitynav" style="display:none">Dimensions</button>
 </div>
 </body>
 </html>

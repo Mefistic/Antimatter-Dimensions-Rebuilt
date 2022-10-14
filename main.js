@@ -207,7 +207,7 @@ function buy(d){
 }
 
 function idbuy(d){
-    if(game.ip.greaterThanOrEqualTo(game.id[d].cost)){
+    if(new Decimal(game.ip).greaterThanOrEqualTo(game.id[d].cost)){
         game.ip=game.ip.sub(game.id[d].cost)
         game.id[d].amount=new Decimal(game.id[d].amount).add(1)
         game.id[d].bought=new Decimal(game.id[d].bought).add(1)

@@ -32,12 +32,12 @@ let game = {
 
 const basecosts=['',10, 100, 1e3, 1e6, 1e9, 1e12, 1e15, 1e21]
 const costscaling=['',100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8, 1e9]
-const infupgcosts = ['', 1, 2, 4, 8, 16, 24, 32, 40, 48, 64]
+const infupgcosts = ['', 1, 1, 2, 2, 4, 16, 64, 128, 256, 512]
+const idcosts=['',10, 100, 1e3, 1e4, 1e5, 1e6, 1e7, 1e8]
 
 for(i=1;i<11;i++){game.infupg[i]={bought:false, cost:new Decimal(0)}}
-for(i=1;i<11;i++){game.infupg[i].cost=new Decimal(infupgcosts[i])}
 
-function buyinfupg(upg){if(game.ip.greaterThanOrEqualTo(game.infupg[upg].cost)){
+function buyinfupg(upg){if(new Decimal(game.ip).greaterThanOrEqualTo(game.infupg[upg].cost)){
     if(game.infupg[upg].bought==false){
     game.infupg[upg].bought=true
     game.ip=game.ip.sub(game.infupg[upg].cost)}}
@@ -76,19 +76,19 @@ function updatemult(){
     for(i=1;i<9;i++){
         game.d[i].mult=game.buy10multi.pow(game.d[i].bought).mul(game.dimboost.effect).max(1)
         game.id[i].mult=new Decimal(2).pow(game.id[i].bought).max(1)
-        if(game.infupg[7].bought){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)))}
+        if(game.infupg[7].bought){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)).max(1))}
         if(game.infupg[8].bought){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.timeplayed).div(10))}
-        game.d[i].mult=game.d[i].mult.mul(new Decimal(game.infpower).pow(0.2).max(1))
+        game.d[i].mult=game.d[i].mult.mul(new Decimal(game.infpower).pow(0.5).max(1))
     }
-    if(game.infupg[1].bought){for(i=2;i<9;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[1].bought).pow(1.5).max(1))}}
-    if(game.infupg[2].bought){for(i=1;i<8;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[8].bought).pow(2.25).max(1))}}
+    if(game.infupg[1].bought){for(i=2;i<9;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[1].bought).pow(0.5).max(1))}}
+    if(game.infupg[2].bought){for(i=1;i<8;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[8].bought).mul(5).pow(0.5).max(1))}}
 }
 
 function updatecosts(){
     for(i=1;i<9;i++){
         game.d[i].cost=new Decimal(basecosts[i]).mul(new Decimal(costscaling[i]).pow(game.d[i].bought))
         if(game.d[i].cost.greaterThanOrEqualTo(1e100)){game.d[i].cost=game.d[i].cost.pow(new Decimal(game.d[i].bought).div(1000).add(1))}
-        game.id[i].cost=new Decimal(basecosts[i]).mul(new Decimal(costscaling[i]).pow(game.id[i].bought))
+        game.id[i].cost=new Decimal(idcosts[i]).mul(new Decimal(costscaling[i]).pow(game.id[i].bought))
         if(game.id[i].cost.greaterThanOrEqualTo(1e100)){game.id[i].cost=game.id[i].cost.pow(game.id[i].bought.div(1000).add(1))}
     }
     game.ts.cost=new Decimal(10).pow(new Decimal(game.ts.amount).add(3))
@@ -97,6 +97,7 @@ function updatecosts(){
     game.galaxy.cost=new Decimal(60).add(new Decimal(game.galaxy.amount).mul(40)).mul(new Decimal(game.galaxy.amount).div(2).floor().mul(1.5).add(1)).floor()
     if(game.infupg[3].bought){game.dimboost.cost=game.dimboost.cost.sub(15)}
     if(game.infupg[4].bought){game.galaxy.cost=game.galaxy.cost.sub(25)}
+    for(i=1;i<11;i++){game.infupg[i].cost=new Decimal(infupgcosts[i])}
 }
 
 function generate(){
@@ -147,7 +148,7 @@ function updateui() {
 
     if(game.tab=='infinity'){document.getElementById('infinitytab').style = 'display: box'
     document.getElementById("ip").innerHTML=f(game.ip)
-    document.getElementById("ipgain").innerHTML=f(game.antimatter.div(1.79e308).pow(0.005).sub(1).ceil().max(0))
+    document.getElementById("ipgain").innerHTML=f(game.antimatter.div(1.79e308).pow(0.0075).sub(1).ceil().max(0))
     if(game.antimatter.greaterThanOrEqualTo(1.79e308)){document.getElementById("crunch").className="crunch"}
     else{document.getElementById("crunch").className="crunchdisabled"}
     for(i=1;i<11;i++){
@@ -156,9 +157,9 @@ function updateui() {
             document.getElementById("infupg"+i).className='infupgdisabled'
         }
         if(game.infupg[i].bought==true){document.getElementById("infupg"+i).className='infupgbought'}}
-        document.getElementById("infupg1effect").innerHTML=f(new Decimal(game.d[1].bought).pow(1.5).max(1))
-        document.getElementById("infupg2effect").innerHTML=f(new Decimal(game.d[8].bought).pow(2.25).max(1))
-        document.getElementById("infupg7effect").innerHTML=f(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)))
+        document.getElementById("infupg1effect").innerHTML=f(new Decimal(game.d[1].bought).pow(0.5).max(1))
+        document.getElementById("infupg2effect").innerHTML=f(new Decimal(game.d[8].bought).mul(5).pow(0.5).max(1))
+        document.getElementById("infupg7effect").innerHTML=f(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)).max(1))
         document.getElementById("infupg8effect").innerHTML=f(new Decimal(game.timeplayed).div(10))
     }else{document.getElementById('infinitytab').style = 'display: none'}
 
@@ -167,7 +168,7 @@ function updateui() {
     if(game.tab=='infdimensions'){document.getElementById('infdimensionstab').style = 'display: box'
     document.getElementById("ip2").innerHTML=f(game.ip)
     document.getElementById("infpower").innerHTML=f(game.infpower)
-    document.getElementById("infpowereffect").innerHTML=f(game.infpower.pow(0.2).max(1))
+    document.getElementById("infpowereffect").innerHTML=f(game.infpower.pow(0.5).max(1))
     for(i=1;i<9;i++){
     document.getElementById('id'+i+'amount').innerHTML=f(game.id[i].amount)
     document.getElementById('id'+i+'bought').innerHTML=f(game.id[i].bought)
@@ -208,8 +209,8 @@ function buy(d){
 function idbuy(d){
     if(game.ip.greaterThanOrEqualTo(game.id[d].cost)){
         game.ip=game.ip.sub(game.id[d].cost)
-        game.id[d].amount=game.id[d].amount.add(1)
-        game.id[d].bought=game.id[d].bought.add(1)
+        game.id[d].amount=new Decimal(game.id[d].amount).add(1)
+        game.id[d].bought=new Decimal(game.id[d].bought).add(1)
     }
 }
 
@@ -263,7 +264,7 @@ function crunch(){
                 mult:new Decimal(0)
             }
         }
-        game.ip=new Decimal(game.ip).add(game.antimatter.div(1.79e308).pow(0.005).sub(1).ceil().max(0))
+        game.ip=new Decimal(game.ip).add(game.antimatter.div(1.79e308).pow(0.0075).sub(1).ceil().max(0))
         game.antimatter=new Decimal(10)
         game.ts.amount=new Decimal(0)
         game.dimboost.amount=new Decimal(0)
@@ -298,7 +299,7 @@ window.addEventListener('keydown', (event) => {
     }
 })
 
-setInterval(tick, 1000/60)
+setInterval(tick, 1000/360)
 
 function save() {
     localStorage.setItem('game', JSON.stringify(game))

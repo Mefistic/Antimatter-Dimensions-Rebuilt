@@ -76,23 +76,23 @@ function updatemult(){
     for(i=1;i<9;i++){
         game.d[i].mult=game.buy10multi.pow(game.d[i].bought).mul(game.dimboost.effect).max(1)
         game.id[i].mult=new Decimal(2).pow(game.id[i].bought).max(1)
-        if(game.infupg[7].bought){game.d[i].mult=game.d[i].mult.mul(game.ip.div(game.ip.root(2).max(1)))}
-        if(game.infupg[8].bought){game.d[i].mult=game.d[i].mult.mul(game.timeplayed.div(10))}
+        if(game.infupg[7].bought){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)))}
+        if(game.infupg[8].bought){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.timeplayed).div(10))}
         game.d[i].mult=game.d[i].mult.mul(new Decimal(game.infpower).pow(0.2).max(1))
     }
-    if(game.infupg[1].bought){for(i=2;i<9;i++){game.d[i].mult=game.d[i].mult.mul(game.d[1].bought.pow(1.5).max(1))}}
-    if(game.infupg[2].bought){for(i=1;i<8;i++){game.d[i].mult=game.d[i].mult.mul(game.d[8].bought.pow(2.25).max(1))}}
+    if(game.infupg[1].bought){for(i=2;i<9;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[1].bought).pow(1.5).max(1))}}
+    if(game.infupg[2].bought){for(i=1;i<8;i++){game.d[i].mult=game.d[i].mult.mul(new Decimal(game.d[8].bought).pow(2.25).max(1))}}
 }
 
 function updatecosts(){
     for(i=1;i<9;i++){
         game.d[i].cost=new Decimal(basecosts[i]).mul(new Decimal(costscaling[i]).pow(game.d[i].bought))
-        if(game.d[i].cost.greaterThanOrEqualTo(1e100)){game.d[i].cost=game.d[i].cost.pow(game.d[i].bought.div(1000).add(1))}
+        if(game.d[i].cost.greaterThanOrEqualTo(1e100)){game.d[i].cost=game.d[i].cost.pow(new Decimal(game.d[i].bought).div(1000).add(1))}
         game.id[i].cost=new Decimal(basecosts[i]).mul(new Decimal(costscaling[i]).pow(game.id[i].bought))
         if(game.id[i].cost.greaterThanOrEqualTo(1e100)){game.id[i].cost=game.id[i].cost.pow(game.id[i].bought.div(1000).add(1))}
     }
     game.ts.cost=new Decimal(10).pow(new Decimal(game.ts.amount).add(3))
-    if(game.ts.cost.greaterThanOrEqualTo(1e100)){game.ts.cost=game.ts.cost.pow(game.ts.amount.div(1000).add(1))}
+    if(game.ts.cost.greaterThanOrEqualTo(1e100)){game.ts.cost=game.ts.cost.pow(new Decimal(game.ts.amount).div(1000).add(1))}
     game.dimboost.cost=new Decimal(20).add(new Decimal(game.dimboost.amount).mul(10)).mul(new Decimal(game.dimboost.amount).div(4).floor().mul(2).add(1)).floor()
     game.galaxy.cost=new Decimal(60).add(new Decimal(game.galaxy.amount).mul(40)).mul(new Decimal(game.galaxy.amount).div(2).floor().mul(1.5).add(1)).floor()
     if(game.infupg[3].bought){game.dimboost.cost=game.dimboost.cost.sub(15)}
@@ -151,15 +151,15 @@ function updateui() {
     if(game.antimatter.greaterThanOrEqualTo(1.79e308)){document.getElementById("crunch").className="crunch"}
     else{document.getElementById("crunch").className="crunchdisabled"}
     for(i=1;i<11;i++){
-        if(game.ip.greaterThanOrEqualTo(game.infupg[i].cost)){
+        if(new Decimal(game.ip).greaterThanOrEqualTo(game.infupg[i].cost)){
         document.getElementById("infupg"+i).className='infupgenabled'}else{
             document.getElementById("infupg"+i).className='infupgdisabled'
         }
         if(game.infupg[i].bought==true){document.getElementById("infupg"+i).className='infupgbought'}}
-        document.getElementById("infupg1effect").innerHTML=f(game.d[1].bought.pow(1.5).max(1))
-        document.getElementById("infupg2effect").innerHTML=f(game.d[8].bought.pow(2.25).max(1))
-        document.getElementById("infupg7effect").innerHTML=f(game.ip.div(game.ip.root(2).max(1)))
-        document.getElementById("infupg8effect").innerHTML=f(game.timeplayed.div(10))
+        document.getElementById("infupg1effect").innerHTML=f(new Decimal(game.d[1].bought).pow(1.5).max(1))
+        document.getElementById("infupg2effect").innerHTML=f(new Decimal(game.d[8].bought).pow(2.25).max(1))
+        document.getElementById("infupg7effect").innerHTML=f(new Decimal(game.ip).div(new Decimal(game.ip).root(2).max(1)))
+        document.getElementById("infupg8effect").innerHTML=f(new Decimal(game.timeplayed).div(10))
     }else{document.getElementById('infinitytab').style = 'display: none'}
 
 
@@ -173,7 +173,7 @@ function updateui() {
     document.getElementById('id'+i+'bought').innerHTML=f(game.id[i].bought)
     document.getElementById('id'+i+'mult').innerHTML=f(game.id[i].mult)+'x'
     document.getElementById('id'+i+'buy').innerHTML='Cost: '+f(game.id[i].cost)+' IP'
-    if(game.ip.greaterThanOrEqualTo(game.id[i].cost)){
+    if(new Decimal(game.ip).greaterThanOrEqualTo(game.id[i].cost)){
         document.getElementById('id'+i+'buy').className='infdimenabled'
     }else{document.getElementById('id'+i+'buy').className='buttondisabled'}
     }}else{document.getElementById('infdimensionstab').style = 'display: none'}
@@ -263,12 +263,12 @@ function crunch(){
                 mult:new Decimal(0)
             }
         }
-        game.ip=game.ip.add(game.antimatter.div(1.79e308).pow(0.005).sub(1).ceil().max(0))
+        game.ip=new Decimal(game.ip).add(game.antimatter.div(1.79e308).pow(0.005).sub(1).ceil().max(0))
         game.antimatter=new Decimal(10)
         game.ts.amount=new Decimal(0)
         game.dimboost.amount=new Decimal(0)
         game.galaxy.amount=new Decimal(0)
-        game.infinitied=game.infinitied.add(1)
+        game.infinitied=new Decimal(game.infinitied).add(1)
         game.infinitytime=new Decimal(0)
         if(game.infupg[9].bought){game.dimboost.amount=new Decimal(game.dimboost.amount).add(4)}
         if(game.infupg[10].bought){game.galaxy.amount=new Decimal(game.galaxy.amount).add(2)}
